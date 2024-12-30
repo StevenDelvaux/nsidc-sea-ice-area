@@ -1,0 +1,7 @@
+.env
+*.nc
+data/
+nsidc-*.png
+nsidc-*.csv
+*.gif
+__pycache__/
