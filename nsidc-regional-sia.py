@@ -527,15 +527,18 @@ def getfilenamepng(date, north=False):
 def getfilenamepngBackup(date, north=False):
 	return getfilenameprefix(date, north) + '_F18_1.png'
 	
-def downloadNetcdf(date, north=False):
+def downloadDailyFiles(date, north, imageOnly=False):
 	prefixshort = 'n5eil01u.ecs.nsidc.org/PM/' + ('NSIDC-0051.002/' if date < datetime(2023,10,1) else 'NSIDC-0081.002/')
 	prefix = 'https://' + prefixshort
 	nsidcfolder = prefix + str(date.year) + '.' + padzeros(date.month) + '.' + padzeros(date.day) + '/'
 	filenamenc = getfilenamenc(date, north)
-	filenames = [filenamenc]
-	if date.year == 2024:
-		filenamepng = getfilenamepng(date, north)
-		filenames.append(filenamepng)
+	filenamepng = getfilenamepng(date, north)	
+	if imageOnly:
+		filenames = [filenamepng]
+	elif date.year == 2024:
+		filenames = [filenamenc, filenamepng]
+	else:
+		filenames = [filenamenc]
 	username = config('NSIDC_USERNAME')
 	password = config('NSIDC_PASSWORD')
 		
@@ -549,13 +552,11 @@ def downloadNetcdf(date, north=False):
 		localpath = localfolder + '/' + filename
 		url = nsidcfolder + filename
 		
-		s = session.get(url)
-
-		with session.get(s.url,auth=(username,password)) as r:
+		with session.get(url,auth=(username,password)) as r:
 			if r.status_code == 200:
 				with open(localpath, 'wb') as f:
 					f.write(r.content)
-			elif s.url.endswith(".png"):
+			elif url.endswith(".png"):
 				print('got status code', r.status_code)
 				filenameBackup = getfilenamepngBackup(date, north)
 				localpath = './data/' + str(date.year) + '/' + filename
@@ -570,20 +571,20 @@ def downloadNetcdf(date, north=False):
 			else:
 				 raise ValueError(f"Failed to fetch the URL. The status code: {r.status_code}")
 			
-def tryDownloadNetcdf(date, north=False):
+def trydownloadDailyFiles(date, north, imageOnly=False):
 	try:
-		downloadNetcdf(date, north)
+		downloadDailyFiles(date, north, imageOnly)
 	except:
 		print('an exception occurred!!!!')
 		time.sleep(2)
-		downloadNetcdf(date, north)
+		downloadDailyFiles(date, north, imageOnly)
 
 def getSic(date, north = False):
 	filename = getfilenamenc(date, north)
 	#print('file',filename)
 	localFilename = './data/' + str(date.year) + '/' + filename
 	if not os.path.isfile(localFilename):
-		tryDownloadNetcdf(date, north)
+		trydownloadDailyFiles(date, north)
 	
 	f = Dataset(localFilename, 'r', format="NETCDF4")
 	
@@ -997,7 +998,7 @@ def processAuto():
 	
 	print('dates',date,enddate)
 	while date <= enddate:
-		tryDownloadNetcdf(date, north)		
+		trydownloadDailyFiles(date, north)		
 		date = date + timedelta(days = 1)
 
 	nsidcGridCellAreas = np.loadtxt(open("masks/cell_area_" + hemisphere + ".csv", "rb"), delimiter=",", skiprows=0)
@@ -1039,7 +1040,7 @@ def processAuto():
 				os.makedirs(localfolder, exist_ok=True)
 			pngFilename = localfolder + "/" + getfilenamepng(animationdate, north)
 			if not os.path.isfile(pngFilename):
-				tryDownloadNetcdf(animationdate, north)
+				trydownloadDailyFiles(animationdate, north, True)
 			animationdate = animationdate - timedelta(days = 1)
 		make_animation.makeAnimation(yesterday, frames, animationfilename, lambda date: "data/" + str(date.year) + "/" + getfilenamepng(date,north), missingdates)
 	except:
