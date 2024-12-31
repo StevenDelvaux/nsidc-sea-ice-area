@@ -552,7 +552,8 @@ def downloadDailyFiles(date, north, imageOnly=False):
 		localpath = localfolder + '/' + filename
 		url = nsidcfolder + filename
 		
-		with session.get(url,auth=(username,password)) as r:
+		s = session.get(url)
+		with session.get(s.url,auth=(username,password)) as r:
 			if r.status_code == 200:
 				with open(localpath, 'wb') as f:
 					f.write(r.content)

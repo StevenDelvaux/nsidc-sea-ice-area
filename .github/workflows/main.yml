@@ -16,7 +16,9 @@ jobs:
       APP_KEY: ${{ secrets.APP_KEY }}
       APP_SECRET: ${{ secrets.APP_SECRET }}
       OAUTH2_REFRESH_TOKEN: ${{ secrets.OAUTH2_REFRESH_TOKEN }}
-      GOOGLE_DRIVE_CREDENTIALS: ${{ secrets.GOOGLE_DRIVE_CREDENTIALS }}      
+      GOOGLE_DRIVE_CREDENTIALS: ${{ secrets.GOOGLE_DRIVE_CREDENTIALS }}
+      NSIDC_USERNAME: ${{ secrets.NSIDC_USERNAME }}
+      NSIDC_PASSWORD: ${{ secrets.NSIDC_PASSWORD }}      
 
     steps:
     - name: Checkout repository
