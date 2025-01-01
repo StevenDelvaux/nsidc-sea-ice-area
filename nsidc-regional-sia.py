@@ -47,7 +47,7 @@ def updateTotalFile(col, data, isextent, year):
 	regional = data[1:,col]
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 0
-	years = 35 if north else 46
+	years = 36 if north else 47
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
 	lastrow = (padded.reshape((years,365)))[-1]
 	row = lastrow.tolist()
@@ -102,7 +102,7 @@ def generateDecadeSummary(filename, extent):
 	extenttype = 'extent' if extent else 'area'
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 0
-	years = 35 if north else 46
+	years = 36 if north else 47
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
 	matrix = padded.reshape((years,365))
 	day = regional.shape[0] - 365*(years-1) -1
@@ -178,7 +178,7 @@ def generateRankSummary(filename, extent):
 	extenttype = 'extent' if extent else 'area'
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 0
-	years = 35 if north else 46
+	years = 36 if north else 47
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
 	matrix = padded.reshape((years,365))
 	day = regional.shape[0] - 365*(years-1) -1
@@ -223,7 +223,7 @@ def generateRankSummary(filename, extent):
 			currentRank = rank
 		verticalOffset = 60 + 21*i
 		year = (1990 if north else 1979) + index
-		if year == 2024:
+		if year == 2025:
 			color = (255,0,0)
 		else:
 			color = (0,0,0)
@@ -242,7 +242,7 @@ def generateSummary(filename, extent):
 	extenttype = 'extent' if extent else 'area'
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 0
-	years = 35 if north else 46
+	years = 36 if north else 47
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
 	matrix = padded.reshape((years,365))
 	day = regional.shape[0] - 365*(years-1) -1
@@ -281,7 +281,7 @@ def generateSummary(filename, extent):
 	earliestDay = dayList.pop()
 	dayList.reverse()
 	
-	previousValue = matrix[-1, day-earliestDay]
+	previousValue = matrix[-1, day-earliestDay] if day-earliestDay >=0 else matrix[-2, day-earliestDay]
 	color = (0,0,0)
 	hemisphere = 'Arctic' if north else 'Antarctic'	
 	printimtext.text((37 + (12 if north else 0) + (0 if extenttype == 'extent' else 8), 4), 'NSIDC ' + hemisphere + ' sea ice ' + extenttype + ': last ' + str(days) + ' days', color, font=largeFont)
@@ -300,8 +300,8 @@ def generateSummary(filename, extent):
 		date = lastSavedDate - timedelta(days = offset)
 		print('summary date: ',counter,offset,date)
 		counter += 1 
-		value = matrix[-1, day-offset]
-		rank = getRankString(matrix[:, day-offset])
+		value = matrix[-1, day-offset] if day-offset >=0 else matrix[-2, day-offset]
+		rank = getRankString(matrix[:, day-offset] if day-offset >=0 else matrix[0:-1, day-offset])
 		dailyDelta = round(1000*(value-previousValue))
 		dailyDeltaStr = ('  ' if abs(dailyDelta) < 100 else '') + ('  ' if abs(dailyDelta) < 10 else '') + ('+' if dailyDelta >= 0 else ' ') + str(dailyDelta) + 'k' # km'
 		print('last daily value',value,rank,date)
@@ -326,8 +326,8 @@ def generateTotalAreaFile(col, data, isextent, year):
 	regional = data[1:,col]
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 0
-	padded = np.pad(regional, (offset, 365*(35 if north else 46) - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
-	matrix = padded.reshape(((35 if north else 46),365))
+	padded = np.pad(regional, (offset, 365*(36 if north else 47) - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
+	matrix = padded.reshape(((36 if north else 47),365))
 	lastrow = matrix[-1]
 	
 	yearscolumn = np.arange((1990 if north else 1979), year+1)
@@ -535,7 +535,7 @@ def downloadDailyFiles(date, north, imageOnly=False):
 	filenamepng = getfilenamepng(date, north)	
 	if imageOnly:
 		filenames = [filenamepng]
-	elif date.year == 2024:
+	elif date.year >= 2024:
 		filenames = [filenamenc, filenamepng]
 	else:
 		filenames = [filenamenc]
