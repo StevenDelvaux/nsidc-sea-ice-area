@@ -20,7 +20,7 @@ def appendToCsvFile(filenameshort, data, format):
 	
 	lastSavedYear,lastSavedDay = get_last_saved_day.getLastSavedDay(filename)
 	print('last saved day', lastSavedYear, lastSavedDay)
-	rowstoadd = int((365*lastyear + lastday) - (365*lastSavedYear + lastSavedDay))
+	rowstoadd = int((366 if lastSavedYear % 4 == 0 else 365)*(lastyear - lastSavedYear) + lastday - lastSavedDay)
 
 	if rowstoadd <= 0:
 		print('nothing to add to csv file', lastSavedDay)
