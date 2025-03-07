@@ -326,8 +326,9 @@ def generateTotalAreaFile(col, data, isextent, year):
 	regional = data[1:,col]
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 0
-	padded = np.pad(regional, (offset, 365*(36 if north else 47) - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
-	matrix = padded.reshape(((36 if north else 47),365))
+	years = 36 if north else 47
+	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
+	matrix = padded.reshape((years,365))
 	lastrow = matrix[-1]
 	
 	yearscolumn = np.arange((1990 if north else 1979), year+1)
@@ -340,16 +341,16 @@ def generateTotalAreaFile(col, data, isextent, year):
 def plotRegionalGraphsAntarctic(filename):
 	data = np.loadtxt(filename + ".csv", delimiter=",", dtype=str)
 
-	saveRegionalPlot(2, 0, 4.5, data, "Weddell NSIDC sea ice area", "nsidc-area-weddell.png", 9) #6.3
-	saveRegionalPlot(3, 0, 6.0, data, "Weddell NSIDC sea ice extent", "nsidc-extent-weddell.png", 9) # 7.4
-	saveRegionalPlot(4, 0, 1.6, data, "Bellingshausen-Amundsen NSIDC sea ice area", "nsidc-area-bellamu.png", 9) #2.3
-	saveRegionalPlot(5, 0, 2.5, data, "Bellingshausen-Amundsen NSIDC sea ice extent", "nsidc-extent-bellamu.png", 9) #3.4
+	saveRegionalPlot(2, 0, 4.0, data, "Weddell NSIDC sea ice area", "nsidc-area-weddell.png", 9) #6.3
+	saveRegionalPlot(3, 0, 5.0, data, "Weddell NSIDC sea ice extent", "nsidc-extent-weddell.png", 9) # 7.4
+	saveRegionalPlot(4, 0, 1.2, data, "Bellingshausen-Amundsen NSIDC sea ice area", "nsidc-area-bellamu.png", 9) #2.3
+	saveRegionalPlot(5, 0, 1.5, data, "Bellingshausen-Amundsen NSIDC sea ice extent", "nsidc-extent-bellamu.png", 9) #3.4
 	saveRegionalPlot(6, 0, 3.0, data, "Ross NSIDC sea ice area", "nsidc-area-ross.png", 9) #4
 	saveRegionalPlot(7, 0, 4.0, data, "Ross NSIDC sea ice extent", "nsidc-extent-ross.png", 9) # 5
 	saveRegionalPlot(8, 0.0, 1.0, data, "Pacific Southern Ocean NSIDC sea ice area", "nsidc-area-pacific.png", 9) #2
-	saveRegionalPlot(9, 0, 1.6, data, "Pacific Southern Ocean NSIDC sea ice extent", "nsidc-extent-pacific.png", 9) #2.4
-	saveRegionalPlot(10, 0.0, 2.2, data, "Indian Southern Ocean NSIDC sea ice area", "nsidc-area-indian.png", 9) #3.7
-	saveRegionalPlot(11, 0.0, 3.2, data, "Indian Southern Ocean NSIDC sea ice extent", "nsidc-extent-indian.png", 9) #4.4
+	saveRegionalPlot(9, 0, 1.4, data, "Pacific Southern Ocean NSIDC sea ice extent", "nsidc-extent-pacific.png", 9) #2.4
+	saveRegionalPlot(10, 0.0, 1.0, data, "Indian Southern Ocean NSIDC sea ice area", "nsidc-area-indian.png", 9) #3.7
+	saveRegionalPlot(11, 0.0, 1.4, data, "Indian Southern Ocean NSIDC sea ice extent", "nsidc-extent-indian.png", 9) #4.4
 	
 	filenameAntarcticArea = "nsidc-area-antarctic.png"
 	filenameAntarcticExtent = "nsidc-extent-antarctic.png"
@@ -357,11 +358,11 @@ def plotRegionalGraphsAntarctic(filename):
 	filenameAntarcticExtentAnomaly = "nsidc-extent-antarctic-anomaly.png"
 	filenameAntarcticCompactness = "nsidc-compactness-antarctic.png"
 	
-	saveRegionalPlot(14, 0, 11, data, "NSIDC Antarctic sea ice area", filenameAntarcticArea, 9)
-	saveRegionalPlot(15, 0, 15, data, "NSIDC Antarctic sea ice extent", filenameAntarcticExtent, 9)
+	saveRegionalPlot(14, 0, 9, data, "NSIDC Antarctic sea ice area", filenameAntarcticArea, 9)
+	saveRegionalPlot(15, 0, 11, data, "NSIDC Antarctic sea ice extent", filenameAntarcticExtent, 9)
 	saveRegionalPlot(14, -2.5, 1.75, data, "NSIDC Antarctic sea ice area anomaly vs. 1990-2019", filenameAntarcticAreaAnomaly, 2, True)
 	saveRegionalPlot(15, -2.75, 2.6, data, "NSIDC Antarctic sea ice extent anomaly vs. 1990-2019", filenameAntarcticExtentAnomaly, 2, True)
-	saveRegionalPlot(-3, 0.54, 0.8, data, "NSIDC Antarctic sea ice compactness (area divided by extent)", filenameAntarcticCompactness, 2)
+	saveRegionalPlot(-3, 0.55, 0.8, data, "NSIDC Antarctic sea ice compactness (area divided by extent)", filenameAntarcticCompactness, 2)
 
 	if putOnDropbox:
 		dropbox_client.uploadToDropbox([filenameAntarcticCompactness, filenameAntarcticArea, filenameAntarcticExtent, filenameAntarcticAreaAnomaly, filenameAntarcticExtentAnomaly])
@@ -369,27 +370,27 @@ def plotRegionalGraphsAntarctic(filename):
 def plotRegionalGraphsArctic(filename):
 	data = np.loadtxt(filename + ".csv", delimiter=",", dtype=str)
 	legendpos = 8
-	saveRegionalPlot(2, 3.6, 4.6, data, "Central Arctic NSIDC sea ice area", "nsidc-area-cab.png", 4)
+	saveRegionalPlot(2, 4.0, 4.6, data, "Central Arctic NSIDC sea ice area", "nsidc-area-cab.png", 4)
 	saveRegionalPlot(3, 4.0, 4.6, data, "Central Arctic NSIDC sea ice extent", "nsidc-extent-cab.png", 4)
-	saveRegionalPlot(4, 0.5, 0.7, data, "Beaufort NSIDC sea ice area", "nsidc-area-beaufort.png", 4)
-	saveRegionalPlot(5, 0.6, 0.7, data, "Beaufort NSIDC sea ice extent", "nsidc-extent-beaufort.png", 4)
-	saveRegionalPlot(6, 0, 0.8, data, "Chukchi NSIDC sea ice area", "nsidc-area-chukchi.png", 4)
+	saveRegionalPlot(4, 0.5, 0.7, data, "Beaufort NSIDC sea ice area", "nsidc-area-beaufort.png", 8)
+	saveRegionalPlot(5, 0.6, 0.7, data, "Beaufort NSIDC sea ice extent", "nsidc-extent-beaufort.png", 3)
+	saveRegionalPlot(6, 0.5, 0.8, data, "Chukchi NSIDC sea ice area", "nsidc-area-chukchi.png", 4)
 	saveRegionalPlot(7, 0, 0.8, data, "Chukchi NSIDC sea ice extent", "nsidc-extent-chukchi.png", 4)
-	saveRegionalPlot(8, 0.5, 0.75, data, "East Siberian NSIDC sea ice area", "nsidc-area-ess.png", 4)
+	saveRegionalPlot(8, 0.5, 0.75, data, "East Siberian NSIDC sea ice area", "nsidc-area-ess.png", 8)
 	saveRegionalPlot(9, 0.6, 0.75, data, "East Siberian NSIDC sea ice extent", "nsidc-extent-ess.png", 4)
-	saveRegionalPlot(10, 0.3, 0.5, data, "Laptev NSIDC sea ice area", "nsidc-area-laptev.png", 4)
+	saveRegionalPlot(10, 0.35, 0.5, data, "Laptev NSIDC sea ice area", "nsidc-area-laptev.png", 8)
 	saveRegionalPlot(11, 0.4, 0.5, data, "Laptev NSIDC sea ice extent", "nsidc-extent-laptev.png", 4)
-	saveRegionalPlot(12, 0, 1, data, "Kara NSIDC sea ice area", "nsidc-area-kara.png", 4)
+	saveRegionalPlot(12, 0.4, 1, data, "Kara NSIDC sea ice area", "nsidc-area-kara.png", 8)
 	saveRegionalPlot(13, 0, 1, data, "Kara NSIDC sea ice extent", "nsidc-extent-kara.png", 4)
 	saveRegionalPlot(14, 0, 0.8, data, "Barents NSIDC sea ice area", "nsidc-area-barents.png", 2)
 	saveRegionalPlot(15, 0, 1.0, data, "Barents NSIDC sea ice extent", "nsidc-extent-barents.png", 2)
 	saveRegionalPlot(16, 0, 0.7, data, "Greenland Sea NSIDC ice area", "nsidc-area-greenland.png", 4)
 	saveRegionalPlot(17, 0.3, 0.9, data, "Greenland Sea NSIDC ice extent", "nsidc-extent-greenland.png", 2)
-	saveRegionalPlot(18, 0, 1.3, data, "Baffin Bay NSIDC sea ice area", "nsidc-area-baffin.png", 4)
-	saveRegionalPlot(19, 0, 1.6, data, "Baffin Bay NSIDC sea ice extent", "nsidc-extent-baffin.png", 4)
-	saveRegionalPlot(22, 0, 1.3, data, "Hudson Bay NSIDC sea ice area", "nsidc-area-hudson.png", 4)
-	saveRegionalPlot(23, 0, 1.3, data, "Hudson Bay NSIDC sea ice extent", "nsidc-extent-hudson.png", 4)
-	saveRegionalPlot(24, 0.6, 0.85, data, "Canadian Archipelago NSIDC sea ice area", "nsidc-area-caa.png", 4)
+	saveRegionalPlot(18, 0, 1.3, data, "Baffin Bay NSIDC sea ice area", "nsidc-area-baffin.png", 8)
+	saveRegionalPlot(19, 0, 1.6, data, "Baffin Bay NSIDC sea ice extent", "nsidc-extent-baffin.png", 8)
+	saveRegionalPlot(22, 0, 1.3, data, "Hudson Bay NSIDC sea ice area", "nsidc-area-hudson.png", 8)
+	saveRegionalPlot(23, 0.7, 1.3, data, "Hudson Bay NSIDC sea ice extent", "nsidc-extent-hudson.png", 4)
+	saveRegionalPlot(24, 0.7, 0.85, data, "Canadian Archipelago NSIDC sea ice area", "nsidc-area-caa.png", 4)
 	saveRegionalPlot(25, 0.8, 0.85, data, "Canadian Archipelago NSIDC sea ice extent", "nsidc-extent-caa.png", 4)
 	saveRegionalPlot(26, 0, 0.9, data, "Bering NSIDC sea ice area", "nsidc-area-bering.png", 2)
 	saveRegionalPlot(27, 0, 1.2, data, "Bering NSIDC sea ice extent", "nsidc-extent-bering.png", 2)
@@ -400,7 +401,7 @@ def plotRegionalGraphsArctic(filename):
 	filenameArcticBasinArea = "nsidc-area-arctic-basin.png"
 	filenameArcticBasinExtent = "nsidc-extent-arctic-basin.png"
 	
-	saveRegionalPlot(-3, 0.8, 0.92, data, "NSIDC Arctic sea ice compactness (area divided by extent)", filenameArcticCompactness, 4)
+	saveRegionalPlot(-3, 0.84, 0.92, data, "NSIDC Arctic sea ice compactness (area divided by extent)", filenameArcticCompactness, 4)
 	saveRegionalPlot(-2, 6.5, 7.4, data, "Arctic Basin NSIDC sea ice extent", filenameArcticBasinExtent, 4)
 	saveRegionalPlot(-1, 5, 7.4, data, "Arctic Basin NSIDC sea ice area", filenameArcticBasinArea, 4)
 		
@@ -409,10 +410,10 @@ def plotRegionalGraphsArctic(filename):
 	filenameArcticAreaAnomaly = "nsidc-area-arctic-anomaly.png"
 	filenameArcticExtentAnomaly = "nsidc-extent-arctic-anomaly.png"
 	
-	saveRegionalPlot(41, 8.0, 14, data, "NSIDC Arctic sea ice area", filenameArcticArea, 4)
-	saveRegionalPlot(42, 10, 16, data, "NSIDC Arctic sea ice extent", filenameArcticExtent, 4)	
+	saveRegionalPlot(41, 10, 14, data, "NSIDC Arctic sea ice area", filenameArcticArea, 4)
+	saveRegionalPlot(42, 12, 15.5, data, "NSIDC Arctic sea ice extent", filenameArcticExtent, 2)	
 	saveRegionalPlot(41, -2.0, 0.5, data, "NSIDC Arctic sea ice area anomaly vs. 1990-2019", filenameArcticAreaAnomaly, 2, True)
-	saveRegionalPlot(42, -1.5, 0.3, data, "NSIDC Arctic sea ice extent anomaly vs. 1990-2019", filenameArcticExtentAnomaly, 2, True)
+	saveRegionalPlot(42, -1.5, 0.6, data, "NSIDC Arctic sea ice extent anomaly vs. 1990-2019", filenameArcticExtentAnomaly, 2, True)
 	if putOnDropbox:
 		dropbox_client.uploadToDropbox([filenameArcticArea, filenameArcticExtent, filenameArcticAreaAnomaly, filenameArcticExtentAnomaly, filenameArcticCompactness])
 
@@ -430,8 +431,9 @@ def saveRegionalPlot(col, ymin, ymax, data, name, filename, legendpos=1, anomaly
 def getPlotMatrix(data, col):
 	regional = data[1:,col]
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
-	offset = 31 #61 #92 #122 #153 #184 #214 #275 #61 # 0
+	offset = 0 #31 #61 #92 #122 #153 #184 #214 #275 #61 # 0
 	years = 36 if north else 47
+	print('plot matrix shape: ', 365*years, regional.shape)
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45	
 	matrix = padded.reshape((years,365))
 	return matrix
@@ -476,33 +478,34 @@ def printRegionalData(data, ax, col, ymin, ymax, name, legendpos=1, anomaly=Fals
 	
 	dates = np.arange(0,365) # (0,366)
 		
-	ax.plot(dates, matrix[-15,:]-avg, label='2010/11', color=(0.65,0.65,0.65));
-	ax.plot(dates, matrix[-14,:]-avg, label='2011/12', color=(0.44,0.19,0.63));
-	ax.plot(dates, matrix[-13,:]-avg, label='2012/13', color=(0.0,0.13,0.38));
-	ax.plot(dates, matrix[-12,:]-avg, label='2013/14', color=(0,0.44,0.75));
-	ax.plot(dates, matrix[-11,:]-avg, label='2014/15', color=(0.0,0.69,0.94));
-	ax.plot(dates, matrix[-10,:]-avg, label='2015/16', color=(0,0.69,0.31));
-	ax.plot(dates, matrix[-9,:]-avg, label='2016/17', color=(0.57,0.82,0.31));
-	ax.plot(dates, matrix[-8,:]-avg, label='2017/18', color=(1.0,0.75,0));
-	ax.plot(dates, matrix[-7,:]-avg, label='2018/19', color=(0.9,0.4,0.05));
-	ax.plot(dates, matrix[-6,:]-avg, label='2019/20', color=(1.0,0.5,0.5));
-	ax.plot(dates, matrix[-5,:]-avg, label='2020/21', color=(0.58,0.54,0.33));
-	ax.plot(dates, matrix[-4,:]-avg, label='2021/22', color=(0.4,0,0.2));
-	ax.plot(dates, matrix[-3,:]-avg, label='2022/23', color=(0.7,0.2,0.3));
-	ax.plot(dates, matrix[-2,:]-avg, label='2023/24', color=(0.6,0,0));
-	ax.plot(dates, matrix[-1,:]-avg, label='2024/25', color=(1.0,0,0), linewidth=3);
+	ax.plot(dates, matrix[-16,:]-avg, label='2010', color=(0.65,0.65,0.65));
+	ax.plot(dates, matrix[-15,:]-avg, label='2011', color=(0.44,0.19,0.63));
+	ax.plot(dates, matrix[-14,:]-avg, label='2012', color=(0.0,0.13,0.38));
+	ax.plot(dates, matrix[-13,:]-avg, label='2013', color=(0,0.44,0.75));
+	ax.plot(dates, matrix[-12,:]-avg, label='2014', color=(0.0,0.69,0.94));
+	ax.plot(dates, matrix[-11,:]-avg, label='2015', color=(0,0.69,0.31));
+	ax.plot(dates, matrix[-10,:]-avg, label='2016', color=(0.57,0.82,0.31));
+	ax.plot(dates, matrix[-9,:]-avg, label='2017', color=(1.0,0.75,0));
+	ax.plot(dates, matrix[-8,:]-avg, label='2018', color=(0.9,0.4,0.05));
+	ax.plot(dates, matrix[-7,:]-avg, label='2019', color=(1.0,0.5,0.5));
+	ax.plot(dates, matrix[-6,:]-avg, label='2020', color=(0.58,0.54,0.33));
+	ax.plot(dates, matrix[-5,:]-avg, label='2021', color=(0.4,0,0.2));
+	ax.plot(dates, matrix[-4,:]-avg, label='2022', color=(0.7,0.2,0.3));
+	ax.plot(dates, matrix[-3,:]-avg, label='2023', color=(0.5,0.3,0.1));
+	ax.plot(dates, matrix[-2,:]-avg, label='2024', color=(0.75,0,0));
+	ax.plot(dates, matrix[-1,:]-avg, label='2025', color=(1.0,0,0), linewidth=3);
 	ax.set_ylabel("Sea ice " + ('extent' if isextent else 'area') + (' anomaly' if anomaly else '') + " (million km$^2\!$)")
 	ax.set_title(name)
 	ax.legend(loc=legendpos, prop={'size': 8})
-	ax.axis([0, 121, ymin, ymax]) #365
+	ax.axis([0, 120, ymin, ymax]) #365
 	ax.grid(True);
 	
 
-	months = ['Dec', 'Jan','Feb','Mar']
+	months = ['Jan','Feb','Mar','Apr']
 	#ax.set_xticks([0,30,61,92,120,151], ['', '', '', '', '', ''])
-	ax.set_xticks([0,31,62,90,121], ['', '', '', '', '']) #, 211,242,272,303,333,364, '', '', '', '', '', ''])
+	ax.set_xticks([0,31,59,90,120], ['', '', '', '', '']) #, 211,242,272,303,333,364, '', '', '', '', '', ''])
 	#ax.set_xticks([0,31,59,90,120,151,181], ['', '', '', '', '', '', '']) #, 211,242,272,303,333,364, '', '', '', '', '', ''])
-	ax.xaxis.set_minor_locator(ticker.FixedLocator([15.5,46.5,76,105.5])) #,196,226.5,257,287.5,318,348.5]))
+	ax.xaxis.set_minor_locator(ticker.FixedLocator([15,45,74.5,105])) #,196,226.5,257,287.5,318,348.5]))
 	#ax.xaxis.set_minor_locator(ticker.FixedLocator([15.5,45,74.5,105,135.5,166])) #,196,226.5,257,287.5,318,348.5]))
 	#ax.xaxis.set_minor_locator(ticker.FixedLocator([15,45.5,76,106,135.5]))
 	# months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
