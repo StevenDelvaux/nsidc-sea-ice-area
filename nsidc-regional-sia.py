@@ -528,6 +528,9 @@ def getfilenamepng(date, north=False):
 
 def getfilenamepngBackup(date, north=False):
 	return getfilenameprefix(date, north) + '_F18_1.png'
+
+def getfilenamepngBackupBis(date, north=False):
+	return getfilenameprefix(date, north) + '_F17.png'
 	
 def downloadDailyFiles(date, north, imageOnly=False):
 	prefixshort = 'n5eil01u.ecs.nsidc.org/PM/' + ('NSIDC-0051.002/' if date < datetime(2023,10,1) else 'NSIDC-0081.002/')
@@ -562,15 +565,23 @@ def downloadDailyFiles(date, north, imageOnly=False):
 			elif url.endswith(".png"):
 				print('got status code', r.status_code)
 				filenameBackup = getfilenamepngBackup(date, north)
-				localpath = './data/' + str(date.year) + '/' + filename
 				url = nsidcfolder + filenameBackup
-				print('downloading ' + filename)
+				print('downloading ' + filenameBackup)
 				with session.get(url, auth=(username,password)) as r:
 					if r.status_code == 200:
 						with open(localpath, 'wb') as f:
 							f.write(r.content)
 					else:
-						 raise ValueError(f"Failed to fetch the URL. Status code: {r.status_code}")
+						print('got status code', r.status_code)
+						filenameBackup = getfilenamepngBackupBis(date, north)
+						url = nsidcfolder + filenameBackup
+						print('downloading ' + filenameBackup)
+						with session.get(url, auth=(username,password)) as r:
+							if r.status_code == 200:
+								with open(localpath, 'wb') as f:
+									f.write(r.content)
+							else:
+								 raise ValueError(f"Failed to fetch the URL. Status code: {r.status_code}")
 			else:
 				 raise ValueError(f"Failed to fetch the URL. The status code: {r.status_code}")
 			
