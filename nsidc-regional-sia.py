@@ -586,6 +586,9 @@ def downloadDailyFiles(date, north, imageOnly=False):
 				 raise ValueError(f"Failed to fetch the URL. The status code: {r.status_code}")
 			
 def trydownloadDailyFiles(date, north, imageOnly=False):
+	if date in missingdates:
+		print('abort downloading missing date: ', date)
+		return
 	try:
 		downloadDailyFiles(date, north, imageOnly)
 	except:
@@ -992,7 +995,7 @@ def uploadToGoogleDrive():
 	upload_to_google_drive.replace_file_in_google_drive('1lnZUbGibYqvsQaNKXyErTQ6rAJdBredB', 'nsidc-extent-bering.png')
 	upload_to_google_drive.replace_file_in_google_drive('1g2ofXKXrV7HvFCgtsnz8mggIsO2S_TUI', 'nsidc-extent-okhotsk.png')
 
-missingdates = [datetime(2024,9,12),datetime(2024,9,13),datetime(2024,9,14),datetime(2024,9,15),datetime(2024,9,16),datetime(2024,9,17)]
+missingdates = [datetime(2024,9,12),datetime(2024,9,13),datetime(2024,9,14),datetime(2024,9,15),datetime(2024,9,16),datetime(2024,9,17),datetime(2025,3,8)]
 
 def processAuto():
 	hemisphere = "arctic" if north else "antarctic"
