@@ -586,9 +586,6 @@ def downloadDailyFiles(date, north, imageOnly=False):
 				 raise ValueError(f"Failed to fetch the URL. The status code: {r.status_code}")
 			
 def trydownloadDailyFiles(date, north, imageOnly=False):
-	if date in missingdates:
-		print('abort downloading missing date: ', date)
-		return
 	try:
 		downloadDailyFiles(date, north, imageOnly)
 	except:
@@ -1052,6 +1049,11 @@ def processAuto():
 	try:
 		frames = 10
 		for k in range(frames):
+			if animationdate in missingdates:
+				animationdate = animationdate - timedelta(days = 1)
+				print('abort downloading missing date: ', animationdate)
+				continue
+	
 			localfolder = './data/' + str(animationdate.year)
 			if not os.path.isdir(localfolder):
 				os.makedirs(localfolder, exist_ok=True)
