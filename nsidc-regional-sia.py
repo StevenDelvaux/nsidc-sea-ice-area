@@ -1048,10 +1048,11 @@ def processAuto():
 	animationdate = yesterday
 	try:
 		frames = 10
-		for k in range(frames):
+		numberOfAddedImages = 0
+		while numberOfAddedImages < frames:
 			if animationdate in missingdates:
-				animationdate = animationdate - timedelta(days = 1)
 				print('abort downloading missing date: ', animationdate)
+				animationdate = animationdate - timedelta(days = 1)
 				continue
 	
 			localfolder = './data/' + str(animationdate.year)
@@ -1061,6 +1062,7 @@ def processAuto():
 			if not os.path.isfile(pngFilename):
 				trydownloadDailyFiles(animationdate, north, True)
 			animationdate = animationdate - timedelta(days = 1)
+			numberOfAddedImages += 1
 		make_animation.makeAnimation(yesterday, frames, animationfilename, lambda date: "data/" + str(date.year) + "/" + getfilenamepng(date,north), missingdates)
 	except:
 		if auto:
