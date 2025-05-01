@@ -43,11 +43,14 @@ def updateTotalAreaAndExtentFilesArctic(filename, year):
 	updateTotalFile(41, data, False, year)
 	updateTotalFile(42, data, True, year)
 
+def getNumberOfYears():
+	return 36 if north else 47
+
 def updateTotalFile(col, data, isextent, year):
 	regional = data[1:,col]
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 0
-	years = 37 if north else 48
+	years = getNumberOfYears()
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
 	lastrow = (padded.reshape((years,365)))[-1]
 	row = lastrow.tolist()
@@ -102,7 +105,7 @@ def generateDecadeSummary(filename, extent):
 	extenttype = 'extent' if extent else 'area'
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 0
-	years = 37 if north else 48
+	years = getNumberOfYears()
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
 	matrix = padded.reshape((years,365))
 	day = regional.shape[0] - 365*(years-1) -1
@@ -178,7 +181,7 @@ def generateRankSummary(filename, extent):
 	extenttype = 'extent' if extent else 'area'
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 0
-	years = 37 if north else 48
+	years = getNumberOfYears()
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
 	matrix = padded.reshape((years,365))
 	day = regional.shape[0] - 365*(years-1) -1
@@ -242,7 +245,7 @@ def generateSummary(filename, extent):
 	extenttype = 'extent' if extent else 'area'
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 0
-	years = 37 if north else 48
+	years = getNumberOfYears()
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
 	matrix = padded.reshape((years,365))
 	day = regional.shape[0] - 365*(years-1) -1
@@ -326,7 +329,7 @@ def generateTotalAreaFile(col, data, isextent, year):
 	regional = data[1:,col]
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 0
-	years = 37 if north else 48
+	years = getNumberOfYears()
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45
 	matrix = padded.reshape((years,365))
 	lastrow = matrix[-1]
@@ -432,7 +435,7 @@ def getPlotMatrix(data, col):
 	regional = data[1:,col]
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 334 #31 #61 #92 #122 #153 #184 #214 #275 #61 # 0
-	years = 37 if north else 48
+	years = getNumberOfYears() + 1
 	print('plot matrix shape: ', 365*years, regional.shape)
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45	
 	matrix = padded.reshape((years,365))
@@ -1171,9 +1174,20 @@ if auto:
 		uploadToGoogleDrive()
 else: # for running the code manually
 	putOnDropbox = False
-	north = False
+	north = True
 	hemisphere = "arctic" if north else "antarctic"
 	filename = 'nsidc-' + hemisphere + '-regional-area-and-extent'
+	extentRankSummary = generateRankSummary(filename, True)
+		
+	filenames = ["nsidc-arctic-area.csv", "nsidc-arctic-extent.csv", extentRankSummary, "nsidc-antarctic-area.csv", "nsidc-antarctic-extent.csv"] 
+	dropbox_client.uploadToDropbox(filenames)
+	
+	#dropbox_client.downloadFromDropbox([filename + '.csv'])
+
+	#updateTotalAreaAndExtentFilesAntarctic(filename, 2025)	
+	#extentSummary = generateSummary(filename, True)
+	#extentRankSummary = generateRankSummary(filename, True)
+	exit()
 	#dropbox_client.downloadFromDropbox([filename + '.csv'])
 	if north:
 		plotRegionalGraphsArctic(filename)
