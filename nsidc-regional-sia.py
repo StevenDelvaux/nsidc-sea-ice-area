@@ -1048,14 +1048,15 @@ def processAuto():
 		date = date + timedelta(days = 1)
 	#exit() #todo temp
 	animationfilename = 'animation_nsidc_' + hemisphere + '_latest.gif'
-	animationdate = yesterday
+	animationdate = yesterday + timedelta(days = 1)
 	try:
 		frames = 10
 		numberOfAddedImages = 0
+		missingDatesForImages = []
 		while numberOfAddedImages < frames:
+			animationdate = animationdate - timedelta(days = 1)
 			if animationdate in missingdates:
 				print('abort downloading missing date: ', animationdate)
-				animationdate = animationdate - timedelta(days = 1)
 				continue
 	
 			localfolder = './data/' + str(animationdate.year)
@@ -1063,10 +1064,14 @@ def processAuto():
 				os.makedirs(localfolder, exist_ok=True)
 			pngFilename = localfolder + "/" + getfilenamepng(animationdate, north)
 			if not os.path.isfile(pngFilename):
-				trydownloadDailyFiles(animationdate, north, True)
-			animationdate = animationdate - timedelta(days = 1)
+				try:
+					trydownloadDailyFiles(animationdate, north, True)
+				except:
+					print('Abort downloading missing date: ', animationdate)
+					missingDatesForImages.append(animationdate)
+					continue
 			numberOfAddedImages += 1
-		make_animation.makeAnimation(yesterday, frames, animationfilename, lambda date: "data/" + str(date.year) + "/" + getfilenamepng(date,north), missingdates)
+		make_animation.makeAnimation(yesterday, frames, animationfilename, lambda date: "data/" + str(date.year) + "/" + getfilenamepng(date,north), missingDatesForImages)
 	except:
 		if auto:
 			print('exception occurred, removing last data')
