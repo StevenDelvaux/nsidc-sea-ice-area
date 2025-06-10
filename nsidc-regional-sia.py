@@ -443,7 +443,8 @@ def getPlotMatrix(data, col):
 
 def printRegionalData(data, ax, col, ymin, ymax, name, legendpos=1, anomaly=False):
 	print('inside printRegionalData', name, ymin, ymax)
-	
+
+	iscompactness = 'compactness' in name
 	isextent = 'extent' in name 
 	if col > 0:
 		matrix = getPlotMatrix(data, col)
@@ -497,7 +498,7 @@ def printRegionalData(data, ax, col, ymin, ymax, name, legendpos=1, anomaly=Fals
 	ax.plot(dates, matrix[-3,:]-avg, label='2023', color=(0.5,0.3,0.1));
 	ax.plot(dates, matrix[-2,:]-avg, label='2024', color=(0.75,0,0));
 	ax.plot(dates, matrix[-1,:]-avg, label='2025', color=(1.0,0,0), linewidth=3);
-	ax.set_ylabel("Sea ice " + ('extent' if isextent else 'area') + (' anomaly' if anomaly else '') + " (million km$^2\!$)")
+	ax.set_ylabel("Sea ice " + ('compactness' if iscompactness else 'extent' if isextent else 'area') + (' anomaly' if anomaly else '') + (" (million km$^2\!$)" if not iscompactness else ""))
 	ax.set_title(name)
 	ax.legend(loc=legendpos, prop={'size': 8})
 	ax.axis([0, 122, ymin, ymax]) #365
