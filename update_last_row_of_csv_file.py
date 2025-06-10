@@ -19,16 +19,13 @@ def updateLastRowOfCsvFile(shortFilename, data, format):
 		# Read each character in the file one at a time from the penultimate
 		# character going backwards, searching for a newline character
 		# If we find a new line, exit the search
-		while pos > 0 and foundNewlines < 2:
+		while pos > 0 and foundNewlines < 1:
 			pos -= 1
 			file.seek(pos, os.SEEK_SET)
 			ch = file.read(1)
-			if ch == "\r" or ch == "\n":
-				if ch == "\r":
-					print('found carriage return')
-					pos += 1
-				else:
-					print('found newline')
+			if ch == "\n":
+				pos += 1
+				print('found newline')
 				foundNewlines += 1
 
 		# So long as we're not at the start of the file, delete all the characters ahead
