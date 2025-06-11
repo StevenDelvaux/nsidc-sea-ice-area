@@ -13,7 +13,7 @@ def updateLastRowOfCsvFile(shortFilename, data, format):
 		# This code means the following code skips the very last character in the file -
 		# i.e. in the case the last line is null we delete the last line
 		# and the penultimate one
-		pos = file.tell() - 1
+		pos = file.tell() - 4
 		foundNewlines = 0
 
 		# Read each character in the file one at a time from the penultimate
