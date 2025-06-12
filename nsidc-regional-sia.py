@@ -611,7 +611,7 @@ def getSic(date, north = False):
 	f.close()
 	return sic
 
-def calculateArea(date, north=False, previousSic = None, nextSic = None, nsidcGridCellAreas= None, regionalMask= None, validIceFlag= None, previoussSic = None):
+def calculateArea(date, north=False, previousSic = None, twoDaysAgoSic = None, nextSic = None, nsidcGridCellAreas= None, regionalMask= None, validIceFlag= None):
 	"""
 	Calculate sea ice area for a daily gridded sea ice concentration file. 
     """
@@ -634,12 +634,12 @@ def calculateArea(date, north=False, previousSic = None, nextSic = None, nsidcGr
 			if not cellconcentration >= 0 and valid == 1 and previousSic is not None :
 				#print('nan', cellconcentration, row, col)
 				cellconcentration = previousSic[row][col]
-			if not cellconcentration >= 0 and valid == 1 and previoussSic is not None:
-				print('hela')
-				cellconcentration = previoussSic[row][col]
 			if not cellconcentration >= 0 and valid == 1 and nextSic is not None :
 				#print('nan', cellconcentration, row, col)
 				cellconcentration = nextSic[row][col]
+			if not cellconcentration >= 0 and valid == 1 and twoDaysAgoSic is not None :
+				#print('nan', cellconcentration, row, col)
+				cellconcentration = twoDaysAgoSic[row][col]
 			if cellconcentration > 0 and valid == 1 and previousSic is not None and not previousSic[row][col] >= 0 and nextSic is not None and not nextSic[row][col] >= 0:
 				#print('nan', cellconcentration, row, col)
 				cellconcentration = 0			
@@ -1028,21 +1028,25 @@ def processAuto():
 	date = startdate
 	previousDay = date - timedelta(days = 1)
 	twoDaysAgo = date - timedelta(days = 2)
-	nextDay = date + timedelta(days = 1)
 	previousSic = getSic(date - timedelta(days = 1), north) if not previousDay in missingdates else None
-	#previoussSic = getSic(twoDaysAgo, north) if not twoDaysAgo in missingdates else None
+	twoDaysAgoSic = getSic(twoDaysAgo, north) if not twoDaysAgo in missingdates else None
 
 	#enddate = yesterday if auto else datetime(2023,12,18)
 	nextSic = None
 	while date <= enddate:
 		try:
+			nextDay = date + timedelta(days = 1)
 			if date < enddate and not nextDay in missingdates:
 				nextSic = getSic(nextDay, north)
+			else:
+				nextSic = None
 	
 			validIceFlag = np.loadtxt(open("masks/valid_ice_flag_" + padzeros(date.month) + ".csv", "rb"), delimiter=",", skiprows=0)		
 			print('inside process auto bis', north, hemisphere)
 			if(date.month != 2 or date.day != 29): # skip leap days
-				previousSic = calculateArea(date, north, previousSic, nextSic, nsidcGridCellAreas, regionalMask, validIceFlag) #previoussSic
+				currentSic = calculateArea(date, north, previousSic, twoDaysAgoSic, nextSic, nsidcGridCellAreas, regionalMask, validIceFlag)
+				twoDaysAgoSic = previousSic
+				previousSic = currentSic
 		except:
 			#appendNan(date)
 			raise
