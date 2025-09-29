@@ -365,7 +365,7 @@ def plotRegionalGraphsAntarctic(filename):
 	saveRegionalPlot(15, 9, 21, data, "NSIDC Antarctic sea ice extent", filenameAntarcticExtent, 4)
 	saveRegionalPlot(14, -3, 2, data, "NSIDC Antarctic sea ice area anomaly vs. 1990-2019", filenameAntarcticAreaAnomaly, 2, True)
 	saveRegionalPlot(15, -3, 2.0, data, "NSIDC Antarctic sea ice extent anomaly vs. 1990-2019", filenameAntarcticExtentAnomaly, 2, True)
-	saveRegionalPlot(-3, 0.74, 0.85, data, "NSIDC Antarctic sea ice compactness (area divided by extent)", filenameAntarcticCompactness, 1)
+	saveRegionalPlot(-3, 0.64, 0.84, data, "NSIDC Antarctic sea ice compactness (area divided by extent)", filenameAntarcticCompactness, 1)
 
 	if putOnDropbox:
 		dropbox_client.uploadToDropbox([filenameAntarcticCompactness, filenameAntarcticArea, filenameAntarcticExtent, filenameAntarcticAreaAnomaly, filenameAntarcticExtentAnomaly])
@@ -373,50 +373,50 @@ def plotRegionalGraphsAntarctic(filename):
 def plotRegionalGraphsArctic(filename):
 	data = np.loadtxt(filename + ".csv", delimiter=",", dtype=str)
 	legendpos = 8
-	saveRegionalPlot(2, 1.5, 4.4, data, "Central Arctic NSIDC sea ice area", "nsidc-area-cab.png", 3)
-	saveRegionalPlot(3, 2.5, 4.6, data, "Central Arctic NSIDC sea ice extent", "nsidc-extent-cab.png", 3)
-	saveRegionalPlot(4, 0, 0.7, data, "Beaufort NSIDC sea ice area", "nsidc-area-beaufort.png", 1)
-	saveRegionalPlot(5, 0, 0.7, data, "Beaufort NSIDC sea ice extent", "nsidc-extent-beaufort.png", 3)
-	saveRegionalPlot(6, 0, 0.7, data, "Chukchi NSIDC sea ice area", "nsidc-area-chukchi.png", 1)
-	saveRegionalPlot(7, 0, 0.8, data, "Chukchi NSIDC sea ice extent", "nsidc-extent-chukchi.png", 1)
-	saveRegionalPlot(8, 0, 0.72, data, "East Siberian NSIDC sea ice area", "nsidc-area-ess.png", 1)
-	saveRegionalPlot(9, 0, 0.72, data, "East Siberian NSIDC sea ice extent", "nsidc-extent-ess.png", 3)
-	saveRegionalPlot(10, 0, 0.5, data, "Laptev NSIDC sea ice area", "nsidc-area-laptev.png", 1)
-	saveRegionalPlot(11, 0, 0.5, data, "Laptev NSIDC sea ice extent", "nsidc-extent-laptev.png", 1)
-	saveRegionalPlot(12, 0, 0.8, data, "Kara NSIDC sea ice area", "nsidc-area-kara.png", 1)
-	saveRegionalPlot(13, 0, 1, data, "Kara NSIDC sea ice extent", "nsidc-extent-kara.png", 1)
-	saveRegionalPlot(14, 0, 0.3, data, "Barents NSIDC sea ice area", "nsidc-area-barents.png", 1)
-	saveRegionalPlot(15, 0, 0.6, data, "Barents NSIDC sea ice extent", "nsidc-extent-barents.png", 1)
-	saveRegionalPlot(16, 0, 0.5, data, "Greenland Sea NSIDC ice area", "nsidc-area-greenland.png", 1)
-	saveRegionalPlot(17, 0, 0.8, data, "Greenland Sea NSIDC ice extent", "nsidc-extent-greenland.png", 1)
-	saveRegionalPlot(18, 0, 0.7, data, "Baffin Bay NSIDC sea ice area", "nsidc-area-baffin.png", 1)
-	saveRegionalPlot(19, 0, 1.0, data, "Baffin Bay NSIDC sea ice extent", "nsidc-extent-baffin.png", 1)
-	saveRegionalPlot(22, 0, 1.0, data, "Hudson Bay NSIDC sea ice area", "nsidc-area-hudson.png", 1)
-	saveRegionalPlot(23, 0, 1.3, data, "Hudson Bay NSIDC sea ice extent", "nsidc-extent-hudson.png", 1)
-	saveRegionalPlot(24, 0, 0.8, data, "Canadian Archipelago NSIDC sea ice area", "nsidc-area-caa.png", 3)
-	saveRegionalPlot(25, 0, 0.82, data, "Canadian Archipelago NSIDC sea ice extent", "nsidc-extent-caa.png", 3)
-	saveRegionalPlot(26, 0, 0.2, data, "Bering NSIDC sea ice area", "nsidc-area-bering.png", 1)
-	saveRegionalPlot(27, 0, 0.4, data, "Bering NSIDC sea ice extent", "nsidc-extent-bering.png", 1)
-	saveRegionalPlot(28, 0, 0.2, data, "Okhotsk NSIDC sea ice area", "nsidc-area-okhotsk.png", 1)
-	saveRegionalPlot(29, 0, 0.2, data, "Okhotsk NSIDC sea ice extent", "nsidc-extent-okhotsk.png", 1)
+	saveRegionalPlot(2, 1.5, 4.6, data, "Central Arctic NSIDC sea ice area", "nsidc-area-cab.png", 4)
+	saveRegionalPlot(3, 2.5, 4.6, data, "Central Arctic NSIDC sea ice extent", "nsidc-extent-cab.png", 4)
+	saveRegionalPlot(4, 0, 0.7, data, "Beaufort NSIDC sea ice area", "nsidc-area-beaufort.png", 4)
+	saveRegionalPlot(5, 0, 0.7, data, "Beaufort NSIDC sea ice extent", "nsidc-extent-beaufort.png", 4)
+	saveRegionalPlot(6, 0, 0.8, data, "Chukchi NSIDC sea ice area", "nsidc-area-chukchi.png", 2)
+	saveRegionalPlot(7, 0, 0.8, data, "Chukchi NSIDC sea ice extent", "nsidc-extent-chukchi.png", 2)
+	saveRegionalPlot(8, 0, 0.72, data, "East Siberian NSIDC sea ice area", "nsidc-area-ess.png", 4)
+	saveRegionalPlot(9, 0, 0.72, data, "East Siberian NSIDC sea ice extent", "nsidc-extent-ess.png", 4)
+	saveRegionalPlot(10, 0, 0.5, data, "Laptev NSIDC sea ice area", "nsidc-area-laptev.png", 2)
+	saveRegionalPlot(11, 0, 0.5, data, "Laptev NSIDC sea ice extent", "nsidc-extent-laptev.png", 2)
+	saveRegionalPlot(12, 0, 0.8, data, "Kara NSIDC sea ice area", "nsidc-area-kara.png", 2)
+	saveRegionalPlot(13, 0, 1, data, "Kara NSIDC sea ice extent", "nsidc-extent-kara.png", 2)
+	saveRegionalPlot(14, 0, 0.4, data, "Barents NSIDC sea ice area", "nsidc-area-barents.png", 2)
+	saveRegionalPlot(15, 0, 0.6, data, "Barents NSIDC sea ice extent", "nsidc-extent-barents.png", 2)
+	saveRegionalPlot(16, 0, 0.5, data, "Greenland Sea NSIDC ice area", "nsidc-area-greenland.png", 2)
+	saveRegionalPlot(17, 0, 0.8, data, "Greenland Sea NSIDC ice extent", "nsidc-extent-greenland.png", 2)
+	saveRegionalPlot(18, 0, 0.7, data, "Baffin Bay NSIDC sea ice area", "nsidc-area-baffin.png", 2)
+	saveRegionalPlot(19, 0, 1.0, data, "Baffin Bay NSIDC sea ice extent", "nsidc-extent-baffin.png", 2)
+	saveRegionalPlot(22, 0, 1.0, data, "Hudson Bay NSIDC sea ice area", "nsidc-area-hudson.png", 2)
+	saveRegionalPlot(23, 0, 1.3, data, "Hudson Bay NSIDC sea ice extent", "nsidc-extent-hudson.png", 2)
+	saveRegionalPlot(24, 0, 0.82, data, "Canadian Archipelago NSIDC sea ice area", "nsidc-area-caa.png", 4)
+	saveRegionalPlot(25, 0, 0.82, data, "Canadian Archipelago NSIDC sea ice extent", "nsidc-extent-caa.png", 4)
+	saveRegionalPlot(26, 0, 0.2, data, "Bering NSIDC sea ice area", "nsidc-area-bering.png", 2)
+	saveRegionalPlot(27, 0, 0.4, data, "Bering NSIDC sea ice extent", "nsidc-extent-bering.png", 2)
+	saveRegionalPlot(28, 0, 0.2, data, "Okhotsk NSIDC sea ice area", "nsidc-area-okhotsk.png", 2)
+	saveRegionalPlot(29, 0, 0.2, data, "Okhotsk NSIDC sea ice extent", "nsidc-extent-okhotsk.png", 2)
 	
 	filenameArcticCompactness = "nsidc-compactness-arctic.png"
 	filenameArcticBasinArea = "nsidc-area-arctic-basin.png"
 	filenameArcticBasinExtent = "nsidc-extent-arctic-basin.png"
 	
-	saveRegionalPlot(-3, 0.55, 0.87, data, "NSIDC Arctic sea ice compactness (area divided by extent)", filenameArcticCompactness, 3)
-	saveRegionalPlot(-2, 2.5, 7.4, data, "Arctic Basin NSIDC sea ice extent", filenameArcticBasinExtent, 3)
-	saveRegionalPlot(-1, 1.5, 6.8, data, "Arctic Basin NSIDC sea ice area", filenameArcticBasinArea, 3)
+	saveRegionalPlot(-3, 0.55, 0.92, data, "NSIDC Arctic sea ice compactness (area divided by extent)", filenameArcticCompactness, 4)
+	saveRegionalPlot(-2, 2.5, 7.4, data, "Arctic Basin NSIDC sea ice extent", filenameArcticBasinExtent, 4)
+	saveRegionalPlot(-1, 1.5, 7.4, data, "Arctic Basin NSIDC sea ice area", filenameArcticBasinArea, 4)
 		
 	filenameArcticArea = "nsidc-area-arctic.png"
 	filenameArcticExtent = "nsidc-extent-arctic.png"
 	filenameArcticAreaAnomaly = "nsidc-area-arctic-anomaly.png"
 	filenameArcticExtentAnomaly = "nsidc-extent-arctic-anomaly.png"
 	
-	saveRegionalPlot(41, 2, 10.7, data, "NSIDC Arctic sea ice area", filenameArcticArea, 3)
-	saveRegionalPlot(42, 3, 12.3, data, "NSIDC Arctic sea ice extent", filenameArcticExtent, 1)	
-	saveRegionalPlot(41, -2, 0.3, data, "NSIDC Arctic sea ice area anomaly vs. 1990-2019", filenameArcticAreaAnomaly, 3, True)
-	saveRegionalPlot(42, -2.5, 0.2, data, "NSIDC Arctic sea ice extent anomaly vs. 1990-2019", filenameArcticExtentAnomaly, 3, True)
+	saveRegionalPlot(41, 2, 10.7, data, "NSIDC Arctic sea ice area", filenameArcticArea, 9)
+	saveRegionalPlot(42, 3, 12, data, "NSIDC Arctic sea ice extent", filenameArcticExtent, 9)	
+	saveRegionalPlot(41, -2.5, 0.3, data, "NSIDC Arctic sea ice area anomaly vs. 1990-2019", filenameArcticAreaAnomaly, 3, True)
+	saveRegionalPlot(42, -3.0, 0.2, data, "NSIDC Arctic sea ice extent anomaly vs. 1990-2019", filenameArcticExtentAnomaly, 3, True)
 	if putOnDropbox:
 		dropbox_client.uploadToDropbox([filenameArcticArea, filenameArcticExtent, filenameArcticAreaAnomaly, filenameArcticExtentAnomaly, filenameArcticCompactness])
 
@@ -425,7 +425,7 @@ def saveRegionalPlot(col, ymin, ymax, data, name, filename, legendpos=1, anomaly
 	fig, axs = plt.subplots(figsize=(8, 5))
 	printRegionalData(data, axs, col, ymin, ymax, name, legendpos, anomaly)
 	if col == -1:
-		plt.text(35,6.5,'CAB+Beaufort+Chukchi+ESS+Laptev', fontsize=10,color='black')
+		plt.text(35,7.15,'CAB+Beaufort+Chukchi+ESS+Laptev', fontsize=10,color='black')
 	elif col == -2:
 		plt.text(35,7.15,'CAB+Beaufort+Chukchi+ESS+Laptev', fontsize=10,color='black')	
 	
@@ -434,7 +434,7 @@ def saveRegionalPlot(col, ymin, ymax, data, name, filename, legendpos=1, anomaly
 def getPlotMatrix(data, col):
 	regional = data[1:,col]
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
-	offset = 214 #245 #275 #306 #334 #31 #61 #92 #122 #153 #184 #214 #275 #61 # 0
+	offset = 153 #214 #245 #275 #306 #334 #31 #61 #92 #122 #153 #184 #214 #275 #61 # 0
 	years = getNumberOfYears() + 1
 	print('plot matrix shape: ', 365*years, regional.shape)
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45	
@@ -505,11 +505,11 @@ def printRegionalData(data, ax, col, ymin, ymax, name, legendpos=1, anomaly=Fals
 	ax.grid(True);
 	
 
-	months = ['Jun','Jul','Aug','Sep']
+	months = ['Aug','Sep','Oct','Nov']
 	#ax.set_xticks([0,30,61,92,120,151], ['', '', '', '', '', ''])
-	ax.set_xticks([0,30,61,92,122], ['', '', '', '', '']) #, 211,242,272,303,333,364, '', '', '', '', '', ''])
+	ax.set_xticks([0,31,61,92,122], ['', '', '', '', '']) #, 211,242,272,303,333,364, '', '', '', '', '', ''])
 	#ax.set_xticks([0,31,59,90,120,151,181], ['', '', '', '', '', '', '']) #, 211,242,272,303,333,364, '', '', '', '', '', ''])
-	ax.xaxis.set_minor_locator(ticker.FixedLocator([15,45.5,76.5,107])) #,196,226.5,257,287.5,318,348.5]))
+	ax.xaxis.set_minor_locator(ticker.FixedLocator([15.5,46,76.5,107])) #,196,226.5,257,287.5,318,348.5]))
 	#ax.xaxis.set_minor_locator(ticker.FixedLocator([15.5,45,74.5,105,135.5,166])) #,196,226.5,257,287.5,318,348.5]))
 	#ax.xaxis.set_minor_locator(ticker.FixedLocator([15,45.5,76,106,135.5]))
 	# months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -1188,7 +1188,7 @@ else: # for running the code manually
 	hemisphere = "arctic" if north else "antarctic"
 	filename = 'nsidc-' + hemisphere + '-regional-area-and-extent'
 	
-	#dropbox_client.downloadFromDropbox([filename + '.csv'])
+	dropbox_client.downloadFromDropbox([filename + '.csv'])
 
 	#updateTotalAreaAndExtentFilesAntarctic(filename, 2025)	
 	#extentSummary = generateSummary(filename, True)
