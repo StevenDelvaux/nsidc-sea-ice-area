@@ -44,7 +44,7 @@ def updateTotalAreaAndExtentFilesArctic(filename, year):
 	updateTotalFile(42, data, True, year)
 
 def getNumberOfYears():
-	return 36 if north else 47
+	return 37 if north else 48
 
 def updateTotalFile(col, data, isextent, year):
 	regional = data[1:,col]
@@ -226,7 +226,7 @@ def generateRankSummary(filename, extent):
 			currentRank = rank
 		verticalOffset = 60 + 21*i
 		year = (1990 if north else 1979) + index
-		if year == 2025:
+		if year == 2026:
 			color = (255,0,0)
 		else:
 			color = (0,0,0)
