@@ -435,7 +435,10 @@ def getPlotMatrix(data, col):
 	regional = data[1:,col]
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
 	offset = 62 #124 #153 #214 #245 #275 #306 #334 #31 #61 #92 #122 #153 #184 #214 #275 #61 # 0
-	years = getNumberOfYears() + 1
+	years = getNumberOfYears()
+	numberOfEmptyValuesPaddingAtRight = 365*years - regional.shape[0] - offset
+	if numberOfEmptyValuesPaddingAtRight < 0:
+		years += 1
 	print('plot matrix shape: ', 365*years, regional.shape)
 	padded = np.pad(regional, (offset, 365*years - regional.shape[0] - offset), 'constant', constant_values=(np.nan,)) #45	
 	matrix = padded.reshape((years,365))
