@@ -614,7 +614,7 @@ def getSic(date, north = False):
 	f.close()
 	return sic
 
-def calculateArea(date, north=False, previousSic = None, twoDaysAgoSic = None, threeDaysAgoSic = None, nextSic = None, nsidcGridCellAreas= None, regionalMask= None, validIceFlag= None):
+def calculateArea(date, north=False, previousSic = None, twoDaysAgoSic = None, threeDaysAgoSic = None, fourDaysAgoSic = None, nextSic = None, nsidcGridCellAreas= None, regionalMask= None, validIceFlag= None):
 	"""
 	Calculate sea ice area for a daily gridded sea ice concentration file. 
     """
@@ -646,6 +646,9 @@ def calculateArea(date, north=False, previousSic = None, twoDaysAgoSic = None, t
 			if not cellconcentration >= 0 and valid == 1 and threeDaysAgoSic is not None :
 				#print('nan', cellconcentration, row, col)
 				cellconcentration = threeDaysAgoSic[row][col]
+			if not cellconcentration >= 0 and valid == 1 and fourDaysAgoSic is not None :
+				#print('nan', cellconcentration, row, col)
+				cellconcentration = fourDaysAgoSic[row][col]
 			if cellconcentration > 0 and valid == 1 and previousSic is not None and not previousSic[row][col] >= 0 and nextSic is not None and not nextSic[row][col] >= 0:
 				#print('nan', cellconcentration, row, col)
 				cellconcentration = 0			
@@ -1036,9 +1039,11 @@ def processAuto():
 	previousDay = date - timedelta(days = 1)
 	twoDaysAgo = date - timedelta(days = 2)
 	threeDaysAgo = date - timedelta(days = 3)
+	fourDaysAgo = date - timedelta(days = 4)
 	previousSic = getSic(previousDay, north) if not previousDay in missingdates else None
 	twoDaysAgoSic = getSic(twoDaysAgo, north) if not twoDaysAgo in missingdates else None
 	threeDaysAgoSic = getSic(threeDaysAgo, north) if not threeDaysAgo in missingdates else None
+	fourDaysAgoSic = getSic(fourDaysAgo, north) if not fourDaysAgo in missingdates else None
 
 	#enddate = yesterday if auto else datetime(2023,12,18)
 	nextSic = None
@@ -1053,7 +1058,8 @@ def processAuto():
 			validIceFlag = np.loadtxt(open("masks/valid_ice_flag_" + padzeros(date.month) + ".csv", "rb"), delimiter=",", skiprows=0)		
 			print('inside process auto bis', north, hemisphere)
 			if(date.month != 2 or date.day != 29): # skip leap days
-				currentSic = calculateArea(date, north, previousSic, twoDaysAgoSic, threeDaysAgoSic, nextSic, nsidcGridCellAreas, regionalMask, validIceFlag)
+				currentSic = calculateArea(date, north, previousSic, twoDaysAgoSic, threeDaysAgoSic, fourDaysAgoSic, nextSic, nsidcGridCellAreas, regionalMask, validIceFlag)
+				fourDaysAgoSic = threeDaysAgoSic
 				threeDaysAgoSic = twoDaysAgoSic
 				twoDaysAgoSic = previousSic
 				previousSic = currentSic
