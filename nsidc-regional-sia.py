@@ -344,16 +344,16 @@ def generateTotalAreaFile(col, data, isextent, year):
 def plotRegionalGraphsAntarctic(filename):
 	data = np.loadtxt(filename + ".csv", delimiter=",", dtype=str)
 
-	saveRegionalPlot(2, 0, 5.5, data, "Weddell NSIDC sea ice area", "nsidc-area-weddell.png", 1) #6.3
-	saveRegionalPlot(3, 0, 7, data, "Weddell NSIDC sea ice extent", "nsidc-extent-weddell.png", 1) # 7.4
-	saveRegionalPlot(4, 0, 2, data, "Bellingshausen-Amundsen NSIDC sea ice area", "nsidc-area-bellamu.png", 1) #2.3
-	saveRegionalPlot(5, 0, 3, data, "Bellingshausen-Amundsen NSIDC sea ice extent", "nsidc-extent-bellamu.png", 1) #3.4
-	saveRegionalPlot(6, 0, 4, data, "Ross NSIDC sea ice area", "nsidc-area-ross.png", 1) #4
-	saveRegionalPlot(7, 0, 4.5, data, "Ross NSIDC sea ice extent", "nsidc-extent-ross.png", 1) # 5
-	saveRegionalPlot(8, 0.0, 2.0, data, "Pacific Southern Ocean NSIDC sea ice area", "nsidc-area-pacific.png", 1) #2
-	saveRegionalPlot(9, 0, 2.5, data, "Pacific Southern Ocean NSIDC sea ice extent", "nsidc-extent-pacific.png", 1) #2.4
-	saveRegionalPlot(10, 0.0, 3.5, data, "Indian Southern Ocean NSIDC sea ice area", "nsidc-area-indian.png", 1) #3.7
-	saveRegionalPlot(11, 0.0, 4.5, data, "Indian Southern Ocean NSIDC sea ice extent", "nsidc-extent-indian.png", 1) #4.4
+	saveRegionalPlot(2, 0, 5, data, "Weddell NSIDC sea ice area", "nsidc-area-weddell.png", 2) #6.3
+	saveRegionalPlot(3, 0, 5, data, "Weddell NSIDC sea ice extent", "nsidc-extent-weddell.png", 2) # 7.4
+	saveRegionalPlot(4, 0, 2, data, "Bellingshausen-Amundsen NSIDC sea ice area", "nsidc-area-bellamu.png", 2) #2.3
+	saveRegionalPlot(5, 0, 2, data, "Bellingshausen-Amundsen NSIDC sea ice extent", "nsidc-extent-bellamu.png", 2) #3.4
+	saveRegionalPlot(6, 0, 4, data, "Ross NSIDC sea ice area", "nsidc-area-ross.png", 2) #4
+	saveRegionalPlot(7, 0, 4, data, "Ross NSIDC sea ice extent", "nsidc-extent-ross.png", 2) # 5
+	saveRegionalPlot(8, 0.0, 2, data, "Pacific Southern Ocean NSIDC sea ice area", "nsidc-area-pacific.png", 2) #2
+	saveRegionalPlot(9, 0, 2, data, "Pacific Southern Ocean NSIDC sea ice extent", "nsidc-extent-pacific.png", 2) #2.4
+	saveRegionalPlot(10, 0.0, 2, data, "Indian Southern Ocean NSIDC sea ice area", "nsidc-area-indian.png", 2) #3.7
+	saveRegionalPlot(11, 0.0, 2, data, "Indian Southern Ocean NSIDC sea ice extent", "nsidc-extent-indian.png", 2) #4.4
 	
 	filenameAntarcticArea = "nsidc-area-antarctic.png"
 	filenameAntarcticExtent = "nsidc-extent-antarctic.png"
@@ -361,11 +361,11 @@ def plotRegionalGraphsAntarctic(filename):
 	filenameAntarcticExtentAnomaly = "nsidc-extent-antarctic-anomaly.png"
 	filenameAntarcticCompactness = "nsidc-compactness-antarctic.png"
 	
-	saveRegionalPlot(14, 0, 15, data, "NSIDC Antarctic sea ice area", filenameAntarcticArea, 1)
-	saveRegionalPlot(15, 0, 19, data, "NSIDC Antarctic sea ice extent", filenameAntarcticExtent, 1)
+	saveRegionalPlot(14, 0, 11, data, "NSIDC Antarctic sea ice area", filenameAntarcticArea, 2)
+	saveRegionalPlot(15, 0, 13, data, "NSIDC Antarctic sea ice extent", filenameAntarcticExtent, 2)
 	saveRegionalPlot(14, -2.5, 2, data, "NSIDC Antarctic sea ice area anomaly vs. 1990-2019", filenameAntarcticAreaAnomaly, 2, True)
 	saveRegionalPlot(15, -3, 2.5, data, "NSIDC Antarctic sea ice extent anomaly vs. 1990-2019", filenameAntarcticExtentAnomaly, 2, True)
-	saveRegionalPlot(-3, 0.54, 0.82, data, "NSIDC Antarctic sea ice compactness (area divided by extent)", filenameAntarcticCompactness, 3)
+	saveRegionalPlot(-3, 0.54, 0.82, data, "NSIDC Antarctic sea ice compactness (area divided by extent)", filenameAntarcticCompactness, 4)
 
 	if putOnDropbox:
 		dropbox_client.uploadToDropbox([filenameAntarcticCompactness, filenameAntarcticArea, filenameAntarcticExtent, filenameAntarcticAreaAnomaly, filenameAntarcticExtentAnomaly])
@@ -373,50 +373,50 @@ def plotRegionalGraphsAntarctic(filename):
 def plotRegionalGraphsArctic(filename):
 	data = np.loadtxt(filename + ".csv", delimiter=",", dtype=str)
 	legendpos = 8
-	saveRegionalPlot(2, 3.0, 4.6, data, "Central Arctic NSIDC sea ice area", "nsidc-area-cab.png", 4)
-	saveRegionalPlot(3, 3.5, 4.6, data, "Central Arctic NSIDC sea ice extent", "nsidc-extent-cab.png", 4)
-	saveRegionalPlot(4, 0, 0.7, data, "Beaufort NSIDC sea ice area", "nsidc-area-beaufort.png", 4)
-	saveRegionalPlot(5, 0, 0.7, data, "Beaufort NSIDC sea ice extent", "nsidc-extent-beaufort.png", 4)
-	saveRegionalPlot(6, 0, 0.8, data, "Chukchi NSIDC sea ice area", "nsidc-area-chukchi.png", 4)
-	saveRegionalPlot(7, 0, 0.8, data, "Chukchi NSIDC sea ice extent", "nsidc-extent-chukchi.png", 4)
-	saveRegionalPlot(8, 0, 0.72, data, "East Siberian NSIDC sea ice area", "nsidc-area-ess.png", 4)
-	saveRegionalPlot(9, 0, 0.72, data, "East Siberian NSIDC sea ice extent", "nsidc-extent-ess.png", 4)
-	saveRegionalPlot(10, 0, 0.5, data, "Laptev NSIDC sea ice area", "nsidc-area-laptev.png", 4)
-	saveRegionalPlot(11, 0, 0.5, data, "Laptev NSIDC sea ice extent", "nsidc-extent-laptev.png", 4)
-	saveRegionalPlot(12, 0, 1.0, data, "Kara NSIDC sea ice area", "nsidc-area-kara.png", 4)
-	saveRegionalPlot(13, 0, 1.0, data, "Kara NSIDC sea ice extent", "nsidc-extent-kara.png", 4)
-	saveRegionalPlot(14, 0, 0.8, data, "Barents NSIDC sea ice area", "nsidc-area-barents.png", 2)
-	saveRegionalPlot(15, 0, 1.0, data, "Barents NSIDC sea ice extent", "nsidc-extent-barents.png", 2)
-	saveRegionalPlot(16, 0, 0.6, data, "Greenland Sea NSIDC ice area", "nsidc-area-greenland.png", 2)
-	saveRegionalPlot(17, 0, 0.8, data, "Greenland Sea NSIDC ice extent", "nsidc-extent-greenland.png", 2)
-	saveRegionalPlot(18, 0, 1.3, data, "Baffin Bay NSIDC sea ice area", "nsidc-area-baffin.png", 2)
-	saveRegionalPlot(19, 0, 1.5, data, "Baffin Bay NSIDC sea ice extent", "nsidc-extent-baffin.png", 2)
-	saveRegionalPlot(22, 0, 1.3, data, "Hudson Bay NSIDC sea ice area", "nsidc-area-hudson.png", 4)
-	saveRegionalPlot(23, 0, 1.3, data, "Hudson Bay NSIDC sea ice extent", "nsidc-extent-hudson.png", 4)
-	saveRegionalPlot(24, 0, 0.82, data, "Canadian Archipelago NSIDC sea ice area", "nsidc-area-caa.png", 4)
-	saveRegionalPlot(25, 0, 0.82, data, "Canadian Archipelago NSIDC sea ice extent", "nsidc-extent-caa.png", 4)
-	saveRegionalPlot(26, 0, 0.8, data, "Bering NSIDC sea ice area", "nsidc-area-bering.png", 2)
-	saveRegionalPlot(27, 0, 1.1, data, "Bering NSIDC sea ice extent", "nsidc-extent-bering.png", 2)
-	saveRegionalPlot(28, 0, 0.9, data, "Okhotsk NSIDC sea ice area", "nsidc-area-okhotsk.png", 2)
-	saveRegionalPlot(29, 0, 1.3, data, "Okhotsk NSIDC sea ice extent", "nsidc-extent-okhotsk.png", 2)
+	saveRegionalPlot(2, 4.0, 4.6, data, "Central Arctic NSIDC sea ice area", "nsidc-area-cab.png", 3)
+	saveRegionalPlot(3, 4.0, 4.6, data, "Central Arctic NSIDC sea ice extent", "nsidc-extent-cab.png", 3)
+	saveRegionalPlot(4, 0, 0.7, data, "Beaufort NSIDC sea ice area", "nsidc-area-beaufort.png", 3)
+	saveRegionalPlot(5, 0, 0.7, data, "Beaufort NSIDC sea ice extent", "nsidc-extent-beaufort.png", 3)
+	saveRegionalPlot(6, 0, 0.8, data, "Chukchi NSIDC sea ice area", "nsidc-area-chukchi.png", 3)
+	saveRegionalPlot(7, 0, 0.8, data, "Chukchi NSIDC sea ice extent", "nsidc-extent-chukchi.png", 3)
+	saveRegionalPlot(8, 0, 0.72, data, "East Siberian NSIDC sea ice area", "nsidc-area-ess.png", 3)
+	saveRegionalPlot(9, 0, 0.72, data, "East Siberian NSIDC sea ice extent", "nsidc-extent-ess.png", 3)
+	saveRegionalPlot(10, 0, 0.5, data, "Laptev NSIDC sea ice area", "nsidc-area-laptev.png", 3)
+	saveRegionalPlot(11, 0, 0.5, data, "Laptev NSIDC sea ice extent", "nsidc-extent-laptev.png", 3)
+	saveRegionalPlot(12, 0, 1.0, data, "Kara NSIDC sea ice area", "nsidc-area-kara.png", 3)
+	saveRegionalPlot(13, 0, 1.0, data, "Kara NSIDC sea ice extent", "nsidc-extent-kara.png", 3)
+	saveRegionalPlot(14, 0, 0.8, data, "Barents NSIDC sea ice area", "nsidc-area-barents.png", 3)
+	saveRegionalPlot(15, 0, 1.0, data, "Barents NSIDC sea ice extent", "nsidc-extent-barents.png", 3)
+	saveRegionalPlot(16, 0, 0.7, data, "Greenland Sea NSIDC ice area", "nsidc-area-greenland.png", 3)
+	saveRegionalPlot(17, 0, 0.9, data, "Greenland Sea NSIDC ice extent", "nsidc-extent-greenland.png", 3)
+	saveRegionalPlot(18, 0, 1.3, data, "Baffin Bay NSIDC sea ice area", "nsidc-area-baffin.png", 3)
+	saveRegionalPlot(19, 0, 1.6, data, "Baffin Bay NSIDC sea ice extent", "nsidc-extent-baffin.png", 3)
+	saveRegionalPlot(22, 0, 1.3, data, "Hudson Bay NSIDC sea ice area", "nsidc-area-hudson.png", 3)
+	saveRegionalPlot(23, 0, 1.3, data, "Hudson Bay NSIDC sea ice extent", "nsidc-extent-hudson.png", 3)
+	saveRegionalPlot(24, 0, 0.82, data, "Canadian Archipelago NSIDC sea ice area", "nsidc-area-caa.png", 3)
+	saveRegionalPlot(25, 0, 0.82, data, "Canadian Archipelago NSIDC sea ice extent", "nsidc-extent-caa.png", 3)
+	saveRegionalPlot(26, 0, 1, data, "Bering NSIDC sea ice area", "nsidc-area-bering.png", 1)
+	saveRegionalPlot(27, 0, 1.3, data, "Bering NSIDC sea ice extent", "nsidc-extent-bering.png", 1)
+	saveRegionalPlot(28, 0, 1, data, "Okhotsk NSIDC sea ice area", "nsidc-area-okhotsk.png", 1)
+	saveRegionalPlot(29, 0, 1.3, data, "Okhotsk NSIDC sea ice extent", "nsidc-extent-okhotsk.png", 1)
 	
 	filenameArcticCompactness = "nsidc-compactness-arctic.png"
 	filenameArcticBasinArea = "nsidc-area-arctic-basin.png"
 	filenameArcticBasinExtent = "nsidc-extent-arctic-basin.png"
 	
-	saveRegionalPlot(-3, 0.75, 0.92, data, "NSIDC Arctic sea ice compactness (area divided by extent)", filenameArcticCompactness, 4)
-	saveRegionalPlot(-2, 5, 7.4, data, "Arctic Basin NSIDC sea ice extent", filenameArcticBasinExtent, 4)
-	saveRegionalPlot(-1, 4, 7.4, data, "Arctic Basin NSIDC sea ice area", filenameArcticBasinArea, 4)
+	saveRegionalPlot(-3, 0.75, 0.92, data, "NSIDC Arctic sea ice compactness (area divided by extent)", filenameArcticCompactness, 3)
+	saveRegionalPlot(-2, 6.5, 7.3, data, "Arctic Basin NSIDC sea ice extent", filenameArcticBasinExtent, 3)
+	saveRegionalPlot(-1, 6, 7.2, data, "Arctic Basin NSIDC sea ice area", filenameArcticBasinArea, 3)
 		
 	filenameArcticArea = "nsidc-area-arctic.png"
 	filenameArcticExtent = "nsidc-extent-arctic.png"
 	filenameArcticAreaAnomaly = "nsidc-area-arctic-anomaly.png"
 	filenameArcticExtentAnomaly = "nsidc-extent-arctic-anomaly.png"
 	
-	saveRegionalPlot(41, 5, 14, data, "NSIDC Arctic sea ice area", filenameArcticArea, 4)
-	saveRegionalPlot(42, 7, 15.5, data, "NSIDC Arctic sea ice extent", filenameArcticExtent, 4)	
-	saveRegionalPlot(41, -2.5, 0.4, data, "NSIDC Arctic sea ice area anomaly vs. 1990-2019", filenameArcticAreaAnomaly, 3, True)
-	saveRegionalPlot(42, -2.5, 0.3, data, "NSIDC Arctic sea ice extent anomaly vs. 1990-2019", filenameArcticExtentAnomaly, 3, True)
+	saveRegionalPlot(41, 9, 14, data, "NSIDC Arctic sea ice area", filenameArcticArea, 3)
+	saveRegionalPlot(42, 11, 15.5, data, "NSIDC Arctic sea ice extent", filenameArcticExtent, 3)	
+	saveRegionalPlot(41, -1.5, 0.5, data, "NSIDC Arctic sea ice area anomaly vs. 1990-2019", filenameArcticAreaAnomaly, 3, True)
+	saveRegionalPlot(42, -1.5, 0.5, data, "NSIDC Arctic sea ice extent anomaly vs. 1990-2019", filenameArcticExtentAnomaly, 3, True)
 	if putOnDropbox:
 		dropbox_client.uploadToDropbox([filenameArcticArea, filenameArcticExtent, filenameArcticAreaAnomaly, filenameArcticExtentAnomaly, filenameArcticCompactness])
 
@@ -434,7 +434,7 @@ def saveRegionalPlot(col, ymin, ymax, data, name, filename, legendpos=1, anomaly
 def getPlotMatrix(data, col):
 	regional = data[1:,col]
 	regional = np.array([i.lstrip() for i in regional]).astype(float)/1000.0
-	offset = 62 #124 #153 #214 #245 #275 #306 #334 #31 #61 #92 #122 #153 #184 #214 #275 #61 # 0
+	offset = 334 #62 #124 #153 #214 #245 #275 #306 #334 #31 #61 #92 #122 #153 #184 #214 #275 #61 # 0
 	years = getNumberOfYears()
 	numberOfEmptyValuesPaddingAtRight = 365*years - regional.shape[0] - offset
 	if numberOfEmptyValuesPaddingAtRight < 0:
@@ -484,23 +484,23 @@ def printRegionalData(data, ax, col, ymin, ymax, name, legendpos=1, anomaly=Fals
 		avg = np.zeros(365)
 	
 	dates = np.arange(0,365) # (0,366)
-		
-	ax.plot(dates, matrix[-16,:]-avg, label='2010/11', color=(0.65,0.65,0.65));
-	ax.plot(dates, matrix[-15,:]-avg, label='2011/12', color=(0.44,0.19,0.63));
-	ax.plot(dates, matrix[-14,:]-avg, label='2012/13', color=(0.0,0.13,0.38));
-	ax.plot(dates, matrix[-13,:]-avg, label='2013/14', color=(0,0.44,0.75));
-	ax.plot(dates, matrix[-12,:]-avg, label='2014/15', color=(0.0,0.69,0.94));
-	ax.plot(dates, matrix[-11,:]-avg, label='2015/16', color=(0,0.69,0.31));
-	ax.plot(dates, matrix[-10,:]-avg, label='2016/17', color=(0.57,0.82,0.31));
-	ax.plot(dates, matrix[-9,:]-avg, label='2017/18', color=(1.0,0.75,0));
-	ax.plot(dates, matrix[-8,:]-avg, label='2018/19', color=(0.9,0.4,0.05));
-	ax.plot(dates, matrix[-7,:]-avg, label='2019/20', color=(1.0,0.5,0.5));
-	ax.plot(dates, matrix[-6,:]-avg, label='2020/21', color=(0.58,0.54,0.33));
-	ax.plot(dates, matrix[-5,:]-avg, label='2021/22', color=(0.4,0,0.2));
-	ax.plot(dates, matrix[-4,:]-avg, label='2022/23', color=(0.7,0.2,0.3));
-	ax.plot(dates, matrix[-3,:]-avg, label='2023/24', color=(0.5,0.3,0.1));
-	ax.plot(dates, matrix[-2,:]-avg, label='2024/25', color=(0.75,0,0));
-	ax.plot(dates, matrix[-1,:]-avg, label='2025/26', color=(1.0,0,0), linewidth=3);
+	ax.plot(dates, matrix[-17,:]-avg, label='2010', color=(0.65,0.65,0.65));
+	ax.plot(dates, matrix[-16,:]-avg, label='2011', color=(0.44,0.19,0.63));
+	ax.plot(dates, matrix[-15,:]-avg, label='2012', color=(0.0,0.13,0.38));
+	ax.plot(dates, matrix[-14,:]-avg, label='2013', color=(0,0.44,0.75));
+	ax.plot(dates, matrix[-13,:]-avg, label='2014', color=(0.0,0.69,0.94));
+	ax.plot(dates, matrix[-12,:]-avg, label='2015', color=(0,0.69,0.31));
+	ax.plot(dates, matrix[-11,:]-avg, label='2016', color=(0.57,0.82,0.31));
+	ax.plot(dates, matrix[-10,:]-avg, label='2017', color=(1.0,0.75,0));
+	ax.plot(dates, matrix[-9,:]-avg, label='2018', color=(0.9,0.4,0.05));
+	ax.plot(dates, matrix[-8,:]-avg, label='2019', color=(1.0,0.5,0.5));
+	ax.plot(dates, matrix[-7,:]-avg, label='2020', color=(0.58,0.54,0.33));
+	ax.plot(dates, matrix[-6,:]-avg, label='2021', color=(0.4,0,0.2));
+	ax.plot(dates, matrix[-5,:]-avg, label='2022', color=(0.7,0.2,0.3));
+	ax.plot(dates, matrix[-4,:]-avg, label='2023', color=(0.5,0.3,0.1));
+	ax.plot(dates, matrix[-3,:]-avg, label='2024', color=(0.3,0.3,0.3));
+	ax.plot(dates, matrix[-2,:]-avg, label='2025', color=(0.75,0,0));		
+	ax.plot(dates, matrix[-1,:]-avg, label='2026', color=(1.0,0,0), linewidth=3);
 	ax.set_ylabel("Sea ice " + ('compactness' if iscompactness else 'extent' if isextent else 'area') + (' anomaly' if anomaly else '') + (" (million km$^2\!$)" if not iscompactness else ""))
 	ax.set_title(name)
 	ax.legend(loc=legendpos, prop={'size': 8})
@@ -508,11 +508,11 @@ def printRegionalData(data, ax, col, ymin, ymax, name, legendpos=1, anomaly=Fals
 	ax.grid(True);
 	
 
-	months = ['Nov','Dec','Jan','Feb']
+	months = ['Feb','Mar','Apr','May']
 	#ax.set_xticks([0,30,61,92,120,151], ['', '', '', '', '', ''])
-	ax.set_xticks([0,30,61,92,120], ['', '', '', '', '']) #, 211,242,272,303,333,364, '', '', '', '', '', ''])
+	ax.set_xticks([0,28,59,89,120], ['', '', '', '', '']) #, 211,242,272,303,333,364, '', '', '', '', '', ''])
 	#ax.set_xticks([0,31,59,90,120,151,181], ['', '', '', '', '', '', '']) #, 211,242,272,303,333,364, '', '', '', '', '', ''])
-	ax.xaxis.set_minor_locator(ticker.FixedLocator([15,45.5,76.5,106])) #,196,226.5,257,287.5,318,348.5]))
+	ax.xaxis.set_minor_locator(ticker.FixedLocator([14,43.5,74,104.5])) #,196,226.5,257,287.5,318,348.5]))
 	#ax.xaxis.set_minor_locator(ticker.FixedLocator([15.5,45,74.5,105,135.5,166])) #,196,226.5,257,287.5,318,348.5]))
 	#ax.xaxis.set_minor_locator(ticker.FixedLocator([15,45.5,76,106,135.5]))
 	# months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -522,27 +522,21 @@ def printRegionalData(data, ax, col, ymin, ymax, name, legendpos=1, anomaly=Fals
 	ax.tick_params(which='minor', length=0)
 
 def getversion(date):
-	return '18' if date >= datetime(2023,10,1) else '17' if date >= datetime(2008,1,1) else '13' if date >= datetime(1995,9,30) else '11' if date >= datetime(1991,12,19) else '08' if date >= datetime(1987,8,21) else '07'
-
-def getfilenameprefix(date, north=False):
-	return 'NSIDC00' + ('81' if date >= datetime(2023,10,1) else '51') + '_SEAICE_PS_' + ('N' if north else 'S') + '25km_' + str(date.year) + padzeros(date.month) + padzeros(date.day) + '_v2.0'
+	return '' if date >= datetime(2025,1,1) else '18' if date >= datetime(2023,10,1) else '17' if date >= datetime(2008,1,1) else '13' if date >= datetime(1995,9,30) else '11' if date >= datetime(1991,12,19) else '08' if date >= datetime(1987,8,21) else '07'
 
 def getfilenamenc(date, north=False):
-	return getfilenameprefix(date, north) + '.nc'
+	return 'NSIDC-0803_SEAICE_AMSR2_' + ('N' if north else 'S') + '_' + str(date.year) + padzeros(date.month) + padzeros(date.day) + '_v2.0.nc'	
 
 def getfilenamepng(date, north=False):
-	return getfilenameprefix(date, north) + '_F18.png'
+	return ('N' if north else 'S') + '_' + str(date.year) + padzeros(date.month) + padzeros(date.day) + '_conc_hires_v4.0.png'
 
-def getfilenamepngBackup(date, north=False):
-	return getfilenameprefix(date, north) + '_F18_1.png'
+def getfoldernc(date, north=False):
+	return 'https://daacdata.apps.nsidc.org/pub/DATASETS/nsidc0803_daily_a2_seaice_conc_v2/'	
 
-def getfilenamepngBackupBis(date, north=False):
-	return getfilenameprefix(date, north) + '_F17.png'
+def getfolderpng(date, north=False):
+	return 'https://noaadata.apps.nsidc.org/NOAA/G02135/' + ('north' if north else 'south') + '/daily/images/' + str(date.year) + '/' + padzeros(date.month) + '_' + monthNames[date.month-1] + '/'
 	
 def downloadDailyFiles(date, north, imageOnly=False):
-	prefixshort = 'n5eil01u.ecs.nsidc.org/PM/' + ('NSIDC-0051.002/' if date < datetime(2023,10,1) else 'NSIDC-0081.002/')
-	prefix = 'https://' + prefixshort
-	nsidcfolder = prefix + str(date.year) + '.' + padzeros(date.month) + '.' + padzeros(date.day) + '/'
 	filenamenc = getfilenamenc(date, north)
 	filenamepng = getfilenamepng(date, north)	
 	if imageOnly:
@@ -556,7 +550,10 @@ def downloadDailyFiles(date, north, imageOnly=False):
 		
 	session = requests.session()
 	
+	counter = 1
 	for filename in filenames:
+		nsidcfolder = getfoldernc(date, north) if (counter == 1 and not imageOnly) else getfolderpng(date, north)
+		counter += 1
 		print('downloading ' + filename)
 		localfolder = './data/' + str(date.year)
 		if not os.path.isdir(localfolder):
@@ -564,31 +561,14 @@ def downloadDailyFiles(date, north, imageOnly=False):
 		localpath = localfolder + '/' + filename
 		url = nsidcfolder + filename
 		
+		if os.path.exists(localpath):
+			continue
+		
 		s = session.get(url)
 		with session.get(s.url,auth=(username,password)) as r:
 			if r.status_code == 200:
 				with open(localpath, 'wb') as f:
 					f.write(r.content)
-			elif url.endswith(".png"):
-				print('got status code', r.status_code)
-				filenameBackup = getfilenamepngBackup(date, north)
-				url = nsidcfolder + filenameBackup
-				print('downloading ' + filenameBackup)
-				with session.get(url, auth=(username,password)) as r:
-					if r.status_code == 200:
-						with open(localpath, 'wb') as f:
-							f.write(r.content)
-					else:
-						print('got status code', r.status_code)
-						filenameBackup = getfilenamepngBackupBis(date, north)
-						url = nsidcfolder + filenameBackup
-						print('downloading ' + filenameBackup)
-						with session.get(url, auth=(username,password)) as r:
-							if r.status_code == 200:
-								with open(localpath, 'wb') as f:
-									f.write(r.content)
-							else:
-								 raise ValueError(f"Failed to fetch the URL. Status code: {r.status_code}")
 			else:
 				 raise ValueError(f"Failed to fetch the URL. The status code: {r.status_code}")
 			
@@ -610,18 +590,19 @@ def getSic(date, north = False):
 	f = Dataset(localFilename, 'r', format="NETCDF4")
 	
 	# read sea ice concentration	
-	sic = f.variables[('F' if date >= datetime(1987,8,21) else 'N') +  getversion(date) + '_ICECON'][0] #.squeeze()
+	version = getversion(date)
+	sic = f.variables[('' if date >= datetime(2025,1,1) else 'F' if date >= datetime(1987,8,21) else 'N') +  version + ('_' if version != '' else '') + 'ICECON'][0] #.squeeze()
 	f.close()
 	return sic
 
-def calculateArea(date, north=False, previousSic = None, twoDaysAgoSic = None, threeDaysAgoSic = None, fourDaysAgoSic = None, fiveDaysAgoSic = None, sixDaysAgoSic = None, sevenDaysAgoSic = None, nextSic = None, nsidcGridCellAreas= None, regionalMask= None, validIceFlag= None):
+def calculateArea(date, north=False, previousSic = None, nextSic = None, nsidcGridCellAreas= None, regionalMask= None, validIceFlag= None):
 	"""
 	Calculate sea ice area for a daily gridded sea ice concentration file. 
     """
 	print('date',str(date.year) + '-' + padzeros(date.month) + '-' + padzeros(date.day))
 	
 	sic = getSic(date, north)
-	polehole =  29.234 if (north and date.year >= 2008) else 310.770 if north else 0
+	polehole =  63.779 if (north and date.year >= 2025) else 29.234 if (north and date.year >= 2008) else 310.770 if north else 0
 	rows = sic.shape[0] #332s #448n
 	cols = sic.shape[1] #316s #304n
 	totalarea = totalextent = otherarea = otherextent = 0
@@ -640,29 +621,10 @@ def calculateArea(date, north=False, previousSic = None, twoDaysAgoSic = None, t
 			if not cellconcentration >= 0 and valid == 1 and nextSic is not None :
 				#print('nan', cellconcentration, row, col)
 				cellconcentration = nextSic[row][col]
-			if not cellconcentration >= 0 and valid == 1 and twoDaysAgoSic is not None :
-				#print('nan', cellconcentration, row, col)
-				cellconcentration = twoDaysAgoSic[row][col]
-			if not cellconcentration >= 0 and valid == 1 and threeDaysAgoSic is not None :
-				#print('nan', cellconcentration, row, col)
-				cellconcentration = threeDaysAgoSic[row][col]
-			if not cellconcentration >= 0 and valid == 1 and fourDaysAgoSic is not None :
-				#print('nan', cellconcentration, row, col)
-				cellconcentration = fourDaysAgoSic[row][col]
-			if not cellconcentration >= 0 and valid == 1 and fiveDaysAgoSic is not None :
-				#print('nan', cellconcentration, row, col)
-				cellconcentration = fiveDaysAgoSic[row][col]
-			if not cellconcentration >= 0 and valid == 1 and sixDaysAgoSic is not None :
-				#print('nan', cellconcentration, row, col)
-				cellconcentration = sixDaysAgoSic[row][col]
-			if not cellconcentration >= 0 and valid == 1 and sevenDaysAgoSic is not None :
-				#print('nan', cellconcentration, row, col)
-				cellconcentration = sevenDaysAgoSic[row][col]
 			if cellconcentration > 0 and valid == 1 and previousSic is not None and not previousSic[row][col] >= 0 and nextSic is not None and not nextSic[row][col] >= 0:
 				#print('nan', cellconcentration, row, col)
 				cellconcentration = 0			
 			if(cellconcentration > 0.15):
-				valid = validIceFlag[row][col] if north else 1
 				if valid != 1:
 					continue
 				cellarea = nsidcGridCellAreas[row][col]
@@ -727,7 +689,7 @@ def calculateArea(date, north=False, previousSic = None, twoDaysAgoSic = None, t
 					alaarea += area
 					alaextent += extent	
 				else:
-					print('other', row, col, cellregion, cellconcentration, validIceFlag[row][col])
+					#print('other', row, col, cellregion, cellconcentration, validIceFlag[row][col])
 					otherarea += area
 					otherextent += extent
 					# if row < 369:
@@ -1028,7 +990,6 @@ def processAuto():
 	yesterday = datetime.today() - timedelta(days = 1)
 	yesterday = datetime(yesterday.year, yesterday.month, yesterday.day)
 	startdate = lastSavedDayAsDate + timedelta(days = 1) #yesterday + timedelta(days = -5)#todo temp#lastSavedDayAsDate + timedelta(days = 1)
-	#startdate = yesterday #temp!!!
 	date = startdate
 	enddate = yesterday if auto else datetime(2024,2,3) #yesterday + timedelta(days = -1)#todo temp 
 	
@@ -1046,21 +1007,8 @@ def processAuto():
 			
 	date = startdate
 	previousDay = date - timedelta(days = 1)
-	twoDaysAgo = date - timedelta(days = 2)
-	threeDaysAgo = date - timedelta(days = 3)
-	fourDaysAgo = date - timedelta(days = 4)
-	fiveDaysAgo = date - timedelta(days = 5)
-	sixDaysAgo = date - timedelta(days = 6)
-	sevenDaysAgo = date - timedelta(days = 7)
 	previousSic = getSic(previousDay, north) if not previousDay in missingdates else None
-	twoDaysAgoSic = getSic(twoDaysAgo, north) if not twoDaysAgo in missingdates else None
-	threeDaysAgoSic = getSic(threeDaysAgo, north) if not threeDaysAgo in missingdates else None
-	fourDaysAgoSic = getSic(fourDaysAgo, north) if not fourDaysAgo in missingdates else None
-	fiveDaysAgoSic = getSic(fiveDaysAgo, north) if not fiveDaysAgo in missingdates else None
-	sixDaysAgoSic = getSic(sixDaysAgo, north) if not sixDaysAgo in missingdates else None
-	sevenDaysAgoSic = getSic(sevenDaysAgo, north) if not sevenDaysAgo in missingdates else None
 
-	#enddate = yesterday if auto else datetime(2023,12,18)
 	nextSic = None
 	while date <= enddate:
 		try:
@@ -1073,13 +1021,7 @@ def processAuto():
 			validIceFlag = np.loadtxt(open("masks/valid_ice_flag_" + padzeros(date.month) + ".csv", "rb"), delimiter=",", skiprows=0)		
 			print('inside process auto bis', north, hemisphere)
 			if(date.month != 2 or date.day != 29): # skip leap days
-				currentSic = calculateArea(date, north, previousSic, twoDaysAgoSic, threeDaysAgoSic, fourDaysAgoSic, fiveDaysAgoSic, sixDaysAgoSic, sevenDaysAgoSic, nextSic, nsidcGridCellAreas, regionalMask, validIceFlag)
-				sevenDaysAgoSic = sixDaysAgoSic
-				sixDaysAgoSic = fiveDaysAgoSic
-				fiveDaysAgoSic = fourDaysAgoSic
-				fourDaysAgoSic = threeDaysAgoSic
-				threeDaysAgoSic = twoDaysAgoSic
-				twoDaysAgoSic = previousSic
+				currentSic = calculateArea(date, north, previousSic, nextSic, nsidcGridCellAreas, regionalMask, validIceFlag)
 				previousSic = currentSic
 		except:
 			#appendNan(date)
@@ -1210,14 +1152,13 @@ auto = True  # change this to False when running the code manually
 if auto:
 	north = True
 	processAuto()
-	
+
 	north = False
 	processAuto()
 	if putOnGoogleDrive:
 		time.sleep(3)	
 		uploadToGoogleDrive()
 else: # for running the code manually
-	putOnDropbox = False
 	north = True
 	hemisphere = "arctic" if north else "antarctic"
 	filename = 'nsidc-' + hemisphere + '-regional-area-and-extent'
