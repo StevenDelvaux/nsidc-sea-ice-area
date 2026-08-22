@@ -976,7 +976,7 @@ def uploadToGoogleDrive():
 	upload_to_google_drive.replace_file_in_google_drive('1lnZUbGibYqvsQaNKXyErTQ6rAJdBredB', 'nsidc-extent-bering.png')
 	upload_to_google_drive.replace_file_in_google_drive('1g2ofXKXrV7HvFCgtsnz8mggIsO2S_TUI', 'nsidc-extent-okhotsk.png')
 
-missingdates = [datetime(2024,9,12),datetime(2024,9,13),datetime(2024,9,14),datetime(2024,9,15),datetime(2024,9,16),datetime(2024,9,17),datetime(2025,3,8),datetime(2025,9,25),datetime(2025,9,26),datetime(2025,9,27),datetime(2025,9,28),datetime(2025,10,2),datetime(2025,10,3),datetime(2025,10,4),datetime(2025,10,5),datetime(2025,10,6),datetime(2025,10,7),datetime(2025,10,8),datetime(2025,10,13),datetime(2025,10,14),datetime(2025,10,15)]
+missingdates = [datetime(2024,9,12),datetime(2024,9,13),datetime(2024,9,14),datetime(2024,9,15),datetime(2024,9,16),datetime(2024,9,17),datetime(2025,3,8),datetime(2025,9,25),datetime(2025,9,26),datetime(2025,9,27),datetime(2025,9,28),datetime(2025,10,2),datetime(2025,10,3),datetime(2025,10,4),datetime(2025,10,5),datetime(2025,10,6),datetime(2025,10,7),datetime(2025,10,8),datetime(2025,10,13),datetime(2025,10,14),datetime(2025,10,15),datetime(2026,8,17),datetime(2026,8,18),datetime(2026,8,19)]
 
 def processAuto():
 	hemisphere = "arctic" if north else "antarctic"
@@ -998,7 +998,7 @@ def processAuto():
 		if not date in missingdates:
 			trydownloadDailyFiles(date, north)		
 		date = date + timedelta(days = 1)
-
+	print('downloaded daily files')
 	nsidcGridCellAreas = np.loadtxt(open("masks/cell_area_" + hemisphere + ".csv", "rb"), delimiter=",", skiprows=0)
 	print(nsidcGridCellAreas.shape)
 
@@ -1031,9 +1031,10 @@ def processAuto():
 	animationfilename = 'animation_nsidc_' + hemisphere + '_latest.gif'
 	animationdate = yesterday + timedelta(days = 1)
 	try:
+		print('preparing animation')
 		frames = 10
 		numberOfAddedImages = 0
-		missingDatesForImages = []
+		missingDatesForImages = missingdates
 		while numberOfAddedImages < frames:
 			animationdate = animationdate - timedelta(days = 1)
 			if animationdate in missingdates:
